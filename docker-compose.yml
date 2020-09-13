@@ -1,0 +1,53 @@
+services:
+  ######################################################
+  # R Core
+  ######################################################
+  r-core:
+    image: r/core/package:4.0.0
+    build:
+      context: ./
+      dockerfile: ./.app/docker/r-core/Dockerfile
+      args:
+        - R_REPOS='https://mran.microsoft.com/snapshot/2020-04-24'
+    entrypoint: '/bin/bash'
+    container_name: r_core
+    restart: "no"
+  ######################################################
+  # R Development
+  ######################################################
+  r-develop:
+    image: r/develop/package:4.0.0
+    build:
+      context: ./
+      dockerfile: ./.app/docker/r-core/Dockerfile
+      args:
+        - R_REPOS='https://mran.microsoft.com/snapshot/2020-04-24'
+    entrypoint: '/init'
+    container_name: r_develop
+    volumes:
+      - ".:/home/rstudio/rproject/"
+    ports:
+      - 8787:8787
+    restart: "no"
+    depends_on:
+      - r-core
+  ######################################################
+  # R Testing
+  ######################################################
+  r-test:
+    image: r/test/package:4.0.0
+    build:
+      context: ./
+      dockerfile: ./.app/docker/r-testing/Dockerfile
+      args:
+        - TIC_VER='0.9.0'
+    entrypoint: '/bin/bash'
+    container_name: r_test
+    restart: "no"
+    depends_on:
+      - r-core
+  ######################################################
+version: "3.8"
+networks:
+  default:
+    name: r-project

@@ -1,0 +1,28 @@
+Package: usethis2
+Type: Package
+Title: Analytic Project Setup and Development
+URL: https://github.com/tidylab/usethis2
+BugReports: https://github.com/tidylab/usethis2/issues
+Version: 0.0.1
+Date: 2020-04-24
+Authors@R: c(person("Harel", "Lustiger", email = "tidylab@gmail.com", role = c("aut", "cre")))
+Maintainer: Harel Lustiger <tidylab@gmail.com>
+Description: Automate analytic project setup tasks that are otherwise performed 
+    manually. This includes setting up docker, Domain Driven Design (DDD) 
+    elements, and more.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.1.0
+Roxygen: list(markdown = TRUE, r6 = TRUE)
+Language: en-GB
+Depends: 
+    R (>= 3.5)
+Suggests: 
+    testthat,
+    withr
+Imports: 
+    usethis,
+    stringr,
+    yaml,
+    purrr

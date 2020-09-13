@@ -1,0 +1,12 @@
+# Folders
+.app/
+.git/
+.Rproj.user/
+cache/
+inst/docs/
+man/
+
+# Files
+^docker-compose.yml$
+^/.Rprofile$
+^/.Renviron$
