@@ -22,7 +22,7 @@ Suggests:
     testthat,
     withr
 Imports: 
-    usethis,
     stringr,
     yaml,
-    purrr
+    purrr,
+    fs

@@ -6,7 +6,7 @@
 #' @references
 #' \href{https://testthat.r-lib.org/}{`testthat` package information}
 #' \href{https://covr.r-lib.org/}{`covr` package information}
-#' @family DDD
+#' @family domain driven design
 #' @export
 add_command <- function(name, subdomain = NULL, testthat_exemption = FALSE, covr_exemption = testthat_exemption){
     stopifnot(
@@ -25,9 +25,10 @@ add_command <- function(name, subdomain = NULL, testthat_exemption = FALSE, covr
 # Low-lever Functions -----------------------------------------------------
 .add_command <- new.env()
 .add_command$script <- function(name, subdomain, covr_exemption){
+    proj_path <- fs::path_wd
     `%||%` <- function(a,b) if(is.null(a)) b else a
     slug <- .add_command$slug(name, subdomain)
-    dir.create(usethis::proj_path("R"), recursive = TRUE, showWarnings = FALSE)
+    dir.create(proj_path("R"), recursive = TRUE, showWarnings = FALSE)
 
     start_comments <- ifelse(covr_exemption, "# nocov start", "")
     end_comments <- ifelse(covr_exemption, "# nocov end", "")
@@ -50,9 +51,9 @@ add_command <- function(name, subdomain = NULL, testthat_exemption = FALSE, covr
             # Return
             invisible(session)
         }} {end_comments}
-        .{fct_name} <- new.env()
 
         # Steps -------------------------------------------------------------------
+        .{fct_name} <- new.env()
         .{fct_name}$dummy_step <- function(...) NULL
         ", "~", "#'"),
         fct_name = name,
@@ -61,12 +62,14 @@ add_command <- function(name, subdomain = NULL, testthat_exemption = FALSE, covr
         end_comments = end_comments
     )
 
-    writeLines(content, usethis::proj_path("R", slug, ext = "R"))
+    writeLines(content, proj_path("R", slug, ext = "R"))
+
     invisible()
 }
 
 .add_command$test <- function(name, subdomain){
-    dir.create(usethis::proj_path("tests", "testthat"), recursive = TRUE, showWarnings = FALSE)
+    proj_path <- fs::path_wd
+    dir.create(proj_path("tests", "testthat"), recursive = TRUE, showWarnings = FALSE)
     slug <- .add_command$slug(name, subdomain)
     writeLines(
         stringr::str_glue("
@@ -84,7 +87,7 @@ add_command <- function(name, subdomain = NULL, testthat_exemption = FALSE, covr
             expect_silent({fct_name}(session))
         }})
         ", fct_name = name),
-        usethis::proj_path("tests", "testthat", paste0("test-", slug), ext = "R")
+        proj_path("tests", "testthat", paste0("test-", slug), ext = "R")
     )
     invisible()
 }
