@@ -1,5 +1,5 @@
 #' @title Docker Commands Repository
-#' @family Docker Classes
+#' @family docker
 #' @export
 Docker <- R6::R6Class(
     classname = "Docker",

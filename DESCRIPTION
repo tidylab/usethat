@@ -25,4 +25,5 @@ Imports:
     stringr,
     yaml,
     purrr,
-    fs
+    fs,
+    R6
