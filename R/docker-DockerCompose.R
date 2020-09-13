@@ -7,6 +7,7 @@
 #' @param service (`character`) Service name in \code{docker-compose.yml}.
 #' @param field (`character`) Field name in \code{docker-compose.yml}.
 #' @param slug (`character`) URL slug (e.g. \code{shiny-app-name}).
+#' @family docker
 #' @export
 DockerCompose <- R6::R6Class(
     classname = "DockerCompose",
