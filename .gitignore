@@ -1,0 +1,9 @@
+# Folders
+man/
+
+# Files
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+*.png
