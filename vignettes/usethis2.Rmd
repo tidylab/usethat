@@ -1,0 +1,14 @@
+---
+title: "Get Started with **usethis2**"
+bibliography: []
+biblio-style: apalike
+link-citations: yes
+editor_options: 
+  markdown: 
+    wrap: 80
+---
+
+```{r, include = FALSE}
+source(file.path(usethis::proj_get(), "vignettes",  "_common.R"))
+```
+
