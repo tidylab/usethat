@@ -1,5 +1,8 @@
 # Folders
+docs/
 man/
+renv/
+*_cache/
 
 # Files
 .Rproj.user
@@ -7,3 +10,4 @@ man/
 .RData
 .Ruserdata
 *.png
+renv.lock

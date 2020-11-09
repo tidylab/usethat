@@ -3,19 +3,19 @@
 
 <!-- badges: start -->
 
-[![continuous-integration](https://travis-ci.org/tidylab/usethis2.svg?branch=master)](https://travis-ci.org/tidylab/usethis2)
+[![test-suite](https://github.com/tidylab/usethis2/workflows/test-suite/badge.svg)](https://github.com/tidylab/usethis2/actions)
 [![code-coverage](https://codecov.io/gh/tidylab/usethis2/branch/master/graph/badge.svg)](https://codecov.io/github/tidylab/usethis2/?branch=master)
 <!-- badges: end -->
 
-## Analytic Project Setup and Development
+## `usethis2`
 
 <img src="https://i.imgur.com/RLEQkhe.png" width="75%" style="display: block; margin: auto;" />
 
 ## Overview
 
 Automate analytic project setup tasks that are otherwise performed
-manually. This includes setting up docker, Domain Driven Design (DDD)
-elements, and more.
+manually. This includes setting up docker, spinning up a microservice,
+and more.
 
 ## Installation
 

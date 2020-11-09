@@ -1,13 +1,29 @@
+# Docker
+^\.dockerignore$
+^docker-compose\.yml$
+^R/docker-DockerCompose\.R$
+^tests/testthat/test-docker-DockerCompose\.R$
+
 # Folders
-.app/
+.*_cache/
+^\.dev/
+^\.ccache$
+^\.github
+\.gitkeep
+^data-raw/
+^docs/
+^renv/
+^pkgdown/
 
 # Files
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^\.travis\.yml$
 ^codecov\.yml$
+^renv\.lock$
 ^tic\.R$
 ^README\.Rmd$
-^docker-compose\.yml$
 ^LICENSE\.md$
-^\.dockerignore$
+
+# Demo
+demo-.*\.R$
