@@ -3,7 +3,6 @@ output: github_document
 ---
 
 ```{r setup, echo = FALSE, results = 'hide', message = FALSE, warning = FALSE}
-source("./.app/README/helpers.R")
 knitr::opts_chunk$set(
   echo = TRUE, 
   message = FALSE,
@@ -12,38 +11,19 @@ knitr::opts_chunk$set(
   out.width = "100%"
 )
 
-devtools::load_all(README$getwd())
-DESCRIPTION <- desc::description$new(file.path(README$getwd(), "DESCRIPTION"))
+pkgload::load_all(usethis::proj_get())
 ```
 
-```{r badges, echo = FALSE}
-glue <- stringr::str_glue
-slug <- tryCatch(tic::ci_get_slug(), error = function(e) "")
-branch = "master"
 
-badges <- list()
-
-badges$CICD <- list(
-  badge_name = "continuous-integration", 
-  href = glue("https://travis-ci.org/{slug}", slug = slug), 
-  src = glue("https://travis-ci.org/{slug}.svg?branch={branch}", slug = slug, branch = branch)
-)
-badges$covr <- list(
-  badge_name = "code-coverage", 
-  href = glue("https://codecov.io/github/{slug}/?branch={branch}", slug = slug, branch = branch), 
-  src = glue("https://codecov.io/gh/{slug}/branch/{branch}/graph/badge.svg", slug = slug, branch = branch)
-)
-invisible(lapply(badges, do.call, what = usethis::use_badge))
-```
-
-# ``r DESCRIPTION$get_field("Package")`` <img src='https://i.imgur.com/sdsO73r.png' align="right" height="75"/>
+# `usethis2` <img src='https://i.imgur.com/sdsO73r.png' align="right" height="75"/>
 
 <!-- badges: start -->
-[![continuous-integration](https://travis-ci.org/tidylab/usethis2.svg?branch=master)](https://travis-ci.org/tidylab/usethis2)
+[![test-suite](https://github.com/tidylab/usethis2/workflows/test-suite/badge.svg)](https://github.com/tidylab/usethis2/actions)
 [![code-coverage](https://codecov.io/gh/tidylab/usethis2/branch/master/graph/badge.svg)](https://codecov.io/github/tidylab/usethis2/?branch=master)
 <!-- badges: end -->
 
-`r DESCRIPTION$get_field("Title")`
+
+`usethis2`
 ---
 
 ```{r, echo = FALSE, out.width = "75%"}
@@ -52,13 +32,14 @@ knitr::include_graphics("https://i.imgur.com/RLEQkhe.png")
 
 ## Overview
 
-`r DESCRIPTION$get_field("Description")`
+`r read.dcf("DESCRIPTION", "Description")[[1]]`
 
 ## Installation
 
-You can install ``r DESCRIPTION$get_field("Package")`` by using:
+You can install `usethis2` by using:
 
 ```{r, eval=FALSE}
 install.packages("remotes")
 remotes::install_github("tidylab/usethis2")
 ```
+
