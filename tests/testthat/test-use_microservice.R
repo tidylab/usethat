@@ -8,7 +8,8 @@ testthat::setup({
     test_env$endpoint <- "RESTful-API"
 })
 
-# Create R script ---------------------------------------------------------
+
+# Tests -------------------------------------------------------------------
 test_that("create an R script", {
     attach(test_env)
 
@@ -30,4 +31,13 @@ test_that("create an R script", {
     expect_match(file_content, "healthcheck")
     expect_match(file_content, "class")
     # expect_match(file_content, "mirror")
+})
+
+test_that("add suggested packages to DESCRIPTION", {
+    attach(test_env)
+    file_path <- usethis::proj_path("DESCRIPTION")
+    expect_file_exists(file_path)
+    file_content <- readLines(file_path)
+    expect_match(file_content, "plumber")
+    expect_match(file_content, "httptest")
 })

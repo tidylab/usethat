@@ -10,8 +10,11 @@ expect_match <- function(object, regexp) testthat::expect_match(stringr::str_fla
 
 # devtools ----------------------------------------------------------------
 create_package <- function(path){
-        unlink(path, recursive = TRUE, force = TRUE)
-        fs::dir_create(path)
-        invisible(file.create(file.path(path,".here")))
+    unlink(path, recursive = TRUE, force = TRUE)
+    fs::dir_create(path)
+    fs::file_create(file.path(path, "DESCRIPTION"))
+
+    write(c("Package: dummy"), file.path(path, "DESCRIPTION"))
+    invisible()
 }
 
