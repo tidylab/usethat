@@ -28,6 +28,8 @@ Suggests:
 Imports: 
     assertthat,
     fs,
+    glue,
+    magrittr,
     purrr,
     stringr,
     usethis

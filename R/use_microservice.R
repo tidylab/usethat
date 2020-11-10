@@ -11,17 +11,19 @@ use_microservice <- function(entrypoint_name = "microservice", endpoint_name = "
     assert$is_character(endpoint_name)
 
     # Add entrypoint ----------------------------------------------------------
-    file_path <- file.path(getwd(), "inst", "entrypoints", paste0(entrypoint_name, ".R"))
-    file.create(file_path)
+    file_paths <- list()
+    file_paths["foreground"] <- file.path(getwd(), "inst", "entrypoints", paste0(entrypoint_name, "-foreground.R"))
+    file_paths["background"] <- file.path(getwd(), "inst", "entrypoints", paste0(entrypoint_name, "-background.R"))
+    invisible(sapply(file_paths, file.create))
+
+    # template <- list()
+    # template[1] <- read_lines(find.template("templates", "microservice", "plumber-foreground.R"))
+    # template[2] <- read_lines(find.template("templates", "microservice", "plumber-background.R"))
 
     # Add endpoint ------------------------------------------------------------
     file_path <- file.path(getwd(), "inst", "endpoints", paste0(endpoint_name, ".R"))
     file.create(file_path)
 
-    # # Add Value Object --------------------------------------------------------
-    # file_path <- file.path(getwd(), "R", filename$value(name, domain))
-    # file.create(file_path)
-    #
     # template <- read_lines(find.template("templates", "value-object", "template.R"))
     # excerpts <- str_glue(template, name = name, domain = domain)
     #
