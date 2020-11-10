@@ -29,4 +29,5 @@ Imports:
     assertthat,
     fs,
     purrr,
-    stringr
+    stringr,
+    usethis
