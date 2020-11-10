@@ -23,10 +23,9 @@ Depends:
     R (>= 3.5)
 Suggests: 
     testthat,
-    withr
+    withr,
+    rmarkdown
 Imports: 
-    stringr,
-    yaml,
-    purrr,
     fs,
-    R6
+    purrr,
+    stringr
