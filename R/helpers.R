@@ -1,8 +1,8 @@
 # nocov start
 # base --------------------------------------------------------------------
 find.template <- function(...){
-    path <- base::system.file(..., package = "ddd")
-    if(nchar(path) == 0) path <- base::system.file("inst", ..., package = "ddd", mustWork = TRUE)
+    path <- base::system.file(..., package = "usethis2")
+    if(nchar(path) == 0) path <- base::system.file("inst", ..., package = "usethis2", mustWork = TRUE)
     return(path)
 }
 read_lines <- function(con) base::readLines(con) %>% str_flatten()

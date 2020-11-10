@@ -10,30 +10,32 @@ use_microservice <- function(entrypoint_name = "microservice", endpoint_name = "
     assert$is_character(entrypoint_name)
     assert$is_character(endpoint_name)
 
-    # Add entrypoint ----------------------------------------------------------
+    # Setup -------------------------------------------------------------------
     file_paths <- list()
     file_paths["foreground"] <- file.path(getwd(), "inst", "entrypoints", paste0(entrypoint_name, "-foreground.R"))
     file_paths["background"] <- file.path(getwd(), "inst", "entrypoints", paste0(entrypoint_name, "-background.R"))
+    file_paths["endpoint"]   <- file.path(getwd(), "inst", "endpoints",   paste0(endpoint_name, ".R"))
     invisible(sapply(file_paths, file.create))
 
-    # template <- list()
-    # template[1] <- read_lines(find.template("templates", "microservice", "plumber-foreground.R"))
-    # template[2] <- read_lines(find.template("templates", "microservice", "plumber-background.R"))
+    template <- list()
+    template["foreground"] <- read_lines(find.template("templates", "microservice", "entrypoints", "plumber-foreground.R"))
+    template["background"] <- read_lines(find.template("templates", "microservice", "entrypoints", "plumber-background.R"))
+    template["endpoint"]   <- read_lines(find.template("templates", "microservice", "endpoints",   "RESTful.R"))
+
+    # Add entrypoint ----------------------------------------------------------
+    template[["foreground"]] %>%
+        str_glue(name = endpoint_name) %>%
+        write(file = file_paths[["foreground"]], append = FALSE, sep = "\n")
+
+    template[["background"]] %>%
+        str_glue(name = entrypoint_name) %>%
+        write(file = file_paths[["background"]], append = FALSE, sep = "\n")
 
     # Add endpoint ------------------------------------------------------------
-    file_path <- file.path(getwd(), "inst", "endpoints", paste0(endpoint_name, ".R"))
-    file.create(file_path)
-
-    # template <- read_lines(find.template("templates", "value-object", "template.R"))
-    # excerpts <- str_glue(template, name = name, domain = domain)
-    #
-    # excerpts %>%
-    #     unlist(use.names = FALSE) %>%
-    #     paste0(collapse = "\n\n") %>%
-    #     write(file = file_path, append = FALSE, sep = "\n")
-    #
-    # if(interactive()) fs::file_show(file_path) # nocov
+    template[["endpoint"]] %>%
+        write(file = file_paths[["endpoint"]], append = FALSE, sep = "\n")
 
     # Return ------------------------------------------------------------------
+    if(interactive()) sapply(file_paths, fs::file_show) # nocov
     invisible()
 }
