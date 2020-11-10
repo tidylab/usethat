@@ -7,13 +7,17 @@
 #' @export
 use_microservice <- function(entrypoint_name = "microservice", endpoint_name = "RESTful"){
     # Defensive Programming ---------------------------------------------------
-    # assert$is_character(name)
-    # assert$is_character(domain)
-    #
-    # # Setup -------------------------------------------------------------------
-    # name <- title$value(name)
-    # domain <- title$domain(domain)
-    #
+    assert$is_character(entrypoint_name)
+    assert$is_character(endpoint_name)
+
+    # Add entrypoint ----------------------------------------------------------
+    file_path <- file.path(getwd(), "inst", "entrypoints", paste0(entrypoint_name, ".R"))
+    file.create(file_path)
+
+    # Add endpoint ------------------------------------------------------------
+    file_path <- file.path(getwd(), "inst", "endpoints", paste0(endpoint_name, ".R"))
+    file.create(file_path)
+
     # # Add Value Object --------------------------------------------------------
     # file_path <- file.path(getwd(), "R", filename$value(name, domain))
     # file.create(file_path)

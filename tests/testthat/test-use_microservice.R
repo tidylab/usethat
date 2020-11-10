@@ -14,11 +14,11 @@ test_that("create an R script", {
 
     expect_null(use_microservice(entrypoint, endpoint))
 
-    # file_path <- usethis::proj_path("inst", "entrypoints", entrypoint, ext = "R")
-    # expect_file_exists(file_path)
-    #
-    # file_path <- usethis::proj_path("inst", "endpoints", endpoint, ext = "R")
-    # expect_file_exists(file_path)
+    file_path <- usethis::proj_path("inst", "entrypoints", entrypoint, ext = "R")
+    expect_file_exists(file_path)
+
+    file_path <- usethis::proj_path("inst", "endpoints", endpoint, ext = "R")
+    expect_file_exists(file_path)
 
     # file_content <- readLines(file_path)
     # expect_match(file_content, name)
