@@ -2,10 +2,20 @@
 #' @description Generate boiler plate code for a microservice that works out-of-the-box.
 #' @param entrypoint_name (`character`) Entrypoint name.
 #' @param endpoint_name (`character`) Endpoint name.
+#' @param host (`character`) a string that is a valid IPv4 or IPv6 address that
+#'   is owned by this server, which the application will listen on. "0.0.0.0"
+#'   represents all IPv4 addresses and "::/0" represents all IPv6 addresses.
+#' @param port (`integer`) a number or integer that indicates the server port
+#'   that should be listened on. Note that on most Unix-like systems including
+#'   Linux and Mac OS X, port numbers smaller than 1025 require root privileges.
 #' @includeRmd vignettes/use_microservice.Rmd
 #' @family use functions
+#' @return The necessary files for spinning up a microservice at <http://host:port/>
 #' @export
-use_microservice <- function(entrypoint_name = "microservice", endpoint_name = "RESTful"){
+use_microservice <- function(
+    entrypoint_name = "microservice", endpoint_name = "RESTful",
+    host = "localhost", port = 8080)
+{
     # Defensive Programming ---------------------------------------------------
     assert$is_character(entrypoint_name)
     assert$is_character(endpoint_name)
@@ -31,27 +41,33 @@ use_microservice <- function(entrypoint_name = "microservice", endpoint_name = "
 
     # Add entrypoint ----------------------------------------------------------
     templates[["foreground"]] %>%
+        unlist(use.names = FALSE) %>%
         str_glue(name = endpoint_name) %>%
         write(file = file_paths[["foreground"]], append = FALSE, sep = "\n")
 
     templates[["background"]] %>%
-        str_glue(name = entrypoint_name) %>%
+        unlist(use.names = FALSE) %>%
+        str_glue(name = entrypoint_name, host = host, port = port) %>%
         write(file = file_paths[["background"]], append = FALSE, sep = "\n")
 
     # Add endpoint ------------------------------------------------------------
     templates[["endpoint"]] %>%
+        unlist(use.names = FALSE) %>%
         write(file = file_paths[["endpoint"]], append = FALSE, sep = "\n")
 
     # Add unit-test -----------------------------------------------------------
     if(is.not.testing()){#nocov start
         templates[["unit-test"]] %>%
-            str_glue(name = endpoint_name) %>%
+            unlist(use.names = FALSE) %>%
+            str_glue(name = endpoint_name, host = host, port = port) %>%
             write(file = file_paths[["unit-test"]], append = FALSE, sep = "\n")
 
         templates[["helpers-xyz"]] %>%
+            unlist(use.names = FALSE) %>%
             write(file = file_paths[["helpers-xyz"]], append = TRUE, sep = "\n")
 
         templates[["setup-xyz"]] %>%
+            unlist(use.names = FALSE) %>%
             write(file = file_paths[["setup-xyz"]], append = TRUE, sep = "\n")
     }#nocov end
 
@@ -60,6 +76,11 @@ use_microservice <- function(entrypoint_name = "microservice", endpoint_name = "
     description$set_dep("httptest", "Suggests", ">=3.3.0")
     description$set_dep("plumber",  "Suggests", ">=1.0.0")
     description$write()
+
+
+    # Add Vignette ------------------------------------------------------------
+
+
 
     # Return ------------------------------------------------------------------
     if(interactive()) sapply(file_paths, fs::file_show) # nocov

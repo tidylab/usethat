@@ -107,6 +107,7 @@ assign(".Rprofile", new.env(), envir = globalenv())
 
     writeLines(c(
         "unlink(usethis::proj_path('docs'), TRUE, TRUE)",
+        "devtools::document()",
         "pkgdown::build_site(devel = FALSE, lazy = FALSE)"
     ), path_script)
 

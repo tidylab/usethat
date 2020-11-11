@@ -10,54 +10,74 @@ editor_options:
 
 ```{r, include = FALSE}
 source(file.path(usethis::proj_get(), "vignettes",  "_common.R"))
+path <- tempfile("docs-")
+dir.create(path, F, T)
 ```
 
 ## What does `use_microservice` do?
 
-Given `entrypoint_name` <microservice> and `endpoint_name` <RESTful>,
+**Given** `entrypoint_name` <microservice>, `endpoint_name` <RESTful>, `host`
+address <localhost> and `port` number <8080>
 
-When `use_microservice` is called
+**When** `use_microservice` is called
 
 ```{r, eval=FALSE, echo=TRUE}
-use_microservice(entrypoint_name = "microservice", endpoint_name = "RESTful")
+use_microservice(
+    entrypoint_name = "microservice", 
+    endpoint_name = "RESTful",
+    host = "localhost",
+    port = 8080             
+)
 ```
 
-Then the function
+```{r, eval=TRUE, echo=FALSE}
+withr::with_envvar(list(TESTTHAT = ""), {
+    withr::with_dir(
+        path, {
+            desc::description$new("!new")$write("DESCRIPTION")
+            use_microservice(
+                entrypoint_name = "microservice", 
+                endpoint_name = "RESTful",
+                host = "localhost",
+                port = 8080             
+            )
+        }
+    )
+})
+```
 
-Generates the necessary files for a working-out-of-the-box microservice. In
-particular, the function:
+**Then** the function generates the necessary files for a working-out-of-the-box
+microservice at <http://localhost:8080/>. In particular, the function creates or
+modifies the following files:
 
--   Creates two entrypoints, foreground and background, to start the
-    microservice
+-   `./inst/entrypoints/microservice-foreground.R`
 
--   Creates an endpoint with default utility, *healthcheck* and *class*, where
+-   `./inst/entrypoints/microservice-background.R`
 
-    -   *healthcheck* returns status 200 if the microservice is live, and
-    -   *class* returns the R object class received by the microservice
+-   .`/inst/endpoints/RESTful.R`
 
--   Creates a unit-test for the endpoint with supporting helper and setup
-    scripts
+-   `./tests/testthat/test-endpoint-RESTful.R`
 
--   Adds the needed packages names to the project DESCRIPTION file
+-   `./tests/testthat/helpers-xyz.R`
 
--   Opens all the files (only in interactive mode)
+-   `./tests/testthat/setup-xyz.R`
 
-The boilerplate code produced by add\_value\_object looks likes this:
+-   `./DESCRIPTION`
 
 ## Spinning up the Microservice
 
 Running the Microservice is done by one of two scripts:
 
 -   `inst/entrypoints/microservice-foreground.R` runs the Microservice at the
-    foreground. This option is appropriate during production. However, running
-    the Microservice at this mode means the R session is locked and would not
-    process CLI or other scripts commands until the Microservice is stopped.
+foreground. This option is appropriate during production. However, running
+the Microservice at this mode means the R session is locked and would not
+process CLI or other scripts commands until the Microservice is stopped.
 
 -   `inst/entrypoints/microservice-background.R`runs the Microservice at the
 
-    background as an RStudio job. This option is appropriate during development.
-    Running the Microservice at this mode allows the programmer to interact with
-    the Microservice by sending it HTTP requests within the same R session.
+background as an RStudio job. This option is appropriate during development.
+Running the Microservice at this mode allows the programmer to interact with the
+Microservice by sending it HTTP requests within the same R session.
 
 ## Discovering the Microservice Details
 
@@ -66,7 +86,19 @@ you need to know what URL exists, what service they provide, and what input they
 require.
 
 Firstly, OpenAPI Specification provides visual documentation for the
-Microservice API. If the
+Microservice API. If the Microservice is hosted locally on port 8080, then you
+can browse OpenAPI at <http://localhost:8080//__docs__/>.
 
-Microservice is hosted locally on port 8080, then you can browse OpenAPI at
-<http://127.0.0.1:8080/__docs__/.>
+Second source of documentation is the Microservice unit-test, located at
+`./tests/testthat/test-endpoint-RESTful.R`. The unit-test fully covers the
+available services, demonstrates how to send HTTP requests, and provides
+examples of how to post-process the returned response into an R `data.frame`.
+
+## Developing and Testing Endpoints
+
+`use_microservice` automatically generates endpoint unit-test that is useful
+both for developing and testing the API. The boilerplate code of the unit-test
+looks like:
+
+```{r code = readLines(file.path(path, "tests/testthat/test-endpoint-RESTful.R")), eval=FALSE, echo=TRUE}
+```

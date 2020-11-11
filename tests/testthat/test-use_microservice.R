@@ -7,7 +7,6 @@ testthat::setup({
     test_env$endpoint <- "RESTful-API"
 })
 
-
 # Tests -------------------------------------------------------------------
 test_that("create an R script", {
     attach(test_env)
