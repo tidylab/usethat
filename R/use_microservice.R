@@ -43,8 +43,10 @@ use_microservice <- function(entrypoint_name = "microservice", endpoint_name = "
         write(file = file_paths[["unit_test"]], append = FALSE, sep = "\n")
 
     # Add suggested packages --------------------------------------------------
-    usethis::use_package("httptest", type = "Suggests", min_version = "3.3.0")
-    usethis::use_package("plumber",  type = "Suggests", min_version = "1.0.0")
+    description <- desc::description$new()
+    description$set_dep("httptest", "Suggests", ">=3.3.0")
+    description$set_dep("plumber",  "Suggests", ">=1.0.0")
+    description$write()
 
     # Return ------------------------------------------------------------------
     if(interactive()) sapply(file_paths, fs::file_show) # nocov

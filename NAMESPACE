@@ -2,3 +2,4 @@
 
 export(use_microservice)
 import(assertthat)
+importFrom(magrittr,"%>%")

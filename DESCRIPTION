@@ -27,9 +27,9 @@ Suggests:
     rmarkdown
 Imports: 
     assertthat,
+    desc,
     fs,
     glue,
     magrittr,
     purrr,
-    stringr,
-    usethis
+    stringr
