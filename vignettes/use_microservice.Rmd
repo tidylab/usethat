@@ -1,5 +1,5 @@
 ---
-title: "Use a Microservice"
+title: "Using a Microservice"
 bibliography: []
 biblio-style: apalike
 link-citations: yes
@@ -12,4 +12,61 @@ editor_options:
 source(file.path(usethis::proj_get(), "vignettes",  "_common.R"))
 ```
 
-hello world
+## What does `use_microservice` do?
+
+Given `entrypoint_name` <microservice> and `endpoint_name` <RESTful>,
+
+When `use_microservice` is called
+
+```{r, eval=FALSE, echo=TRUE}
+use_microservice(entrypoint_name = "microservice", endpoint_name = "RESTful")
+```
+
+Then the function
+
+Generates the necessary files for a working-out-of-the-box microservice. In
+particular, the function:
+
+-   Creates two entrypoints, foreground and background, to start the
+    microservice
+
+-   Creates an endpoint with default utility, *healthcheck* and *class*, where
+
+    -   *healthcheck* returns status 200 if the microservice is live, and
+    -   *class* returns the R object class received by the microservice
+
+-   Creates a unit-test for the endpoint with supporting helper and setup
+    scripts
+
+-   Adds the needed packages names to the project DESCRIPTION file
+
+-   Opens all the files (only in interactive mode)
+
+The boilerplate code produced by add\_value\_object looks likes this:
+
+## Spinning up the Microservice
+
+Running the Microservice is done by one of two scripts:
+
+-   `inst/entrypoints/microservice-foreground.R` runs the Microservice at the
+    foreground. This option is appropriate during production. However, running
+    the Microservice at this mode means the R session is locked and would not
+    process CLI or other scripts commands until the Microservice is stopped.
+
+-   `inst/entrypoints/microservice-background.R`runs the Microservice at the
+
+    background as an RStudio job. This option is appropriate during development.
+    Running the Microservice at this mode allows the programmer to interact with
+    the Microservice by sending it HTTP requests within the same R session.
+
+## Discovering the Microservice Details
+
+Communicating with the Microservice is done through HTTP requests. This means
+you need to know what URL exists, what service they provide, and what input they
+require.
+
+Firstly, OpenAPI Specification provides visual documentation for the
+Microservice API. If the
+
+Microservice is hosted locally on port 8080, then you can browse OpenAPI at
+<http://127.0.0.1:8080/__docs__/.>

@@ -5,4 +5,4 @@
 endpoint_path <- usethis::proj_path("inst", 'endpoints', '{endpoint_name}.R')
 plumber <- plumber::Plumber$new(endpoint_path)
 plumber$setDocsCallback(NULL)
-plumber$run(host = config$host, port = config$port)
+plumber$run(host = 'localhost', port = "8080")

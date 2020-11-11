@@ -1,4 +1,4 @@
-#' @title Lay the Foundations of a Microservice
+#' @title Lay the foundations of a Microservice
 #' @description Generate boiler plate code for a microservice that works out-of-the-box.
 #' @param entrypoint_name (`character`) Entrypoint name.
 #' @param endpoint_name (`character`) Endpoint name.
