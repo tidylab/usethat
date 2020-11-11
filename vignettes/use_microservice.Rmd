@@ -16,8 +16,8 @@ dir.create(path, F, T)
 
 ## What does `use_microservice` do?
 
-**Given** `entrypoint_name` <microservice>, `endpoint_name` <RESTful>, `host`
-address <localhost> and `port` number <8080>
+**Given** `entrypoint_name` \<microservice\>, `endpoint_name` <RESTful>, `host`
+name \<localhost\> and `port` number \<8080\>
 
 **When** `use_microservice` is called
 

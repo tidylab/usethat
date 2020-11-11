@@ -19,6 +19,8 @@ use_microservice <- function(
     # Defensive Programming ---------------------------------------------------
     assert$is_character(entrypoint_name)
     assert$is_character(endpoint_name)
+    assert$is_character(host)
+    assert$is_count(port)
 
     # Setup -------------------------------------------------------------------
     file_paths <- list()
