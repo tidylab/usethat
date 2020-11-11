@@ -12,17 +12,22 @@ use_microservice <- function(entrypoint_name = "microservice", endpoint_name = "
 
     # Setup -------------------------------------------------------------------
     file_paths <- list()
-    file_paths["foreground"] <- file.path(getwd(), "inst",  "entrypoints", paste0(entrypoint_name, "-foreground.R"))
-    file_paths["background"] <- file.path(getwd(), "inst",  "entrypoints", paste0(entrypoint_name, "-background.R"))
-    file_paths["endpoint"]   <- file.path(getwd(), "inst",  "endpoints",   paste0(endpoint_name, ".R"))
-    file_paths["unit_test"]  <- file.path(getwd(), "tests", "testthat",    paste0("test-endpoint-", endpoint_name, ".R"))
+    file_paths["foreground"]  <- file.path(getwd(), "inst",  "entrypoints", paste0(entrypoint_name, "-foreground.R"))
+    file_paths["background"]  <- file.path(getwd(), "inst",  "entrypoints", paste0(entrypoint_name, "-background.R"))
+    file_paths["endpoint"]    <- file.path(getwd(), "inst",  "endpoints",   paste0(endpoint_name, ".R"))
+    file_paths["unit-test"]   <- file.path(getwd(), "tests", "testthat",    paste0("test-endpoint-", endpoint_name, ".R"))
+    file_paths["helpers-xyz"] <- file.path(getwd(), "tests", "testthat",    "helpers-xyz.R")
+    file_paths["setup-xyz"]   <- file.path(getwd(), "tests", "testthat",    "setup-xyz.R")
     invisible(sapply(file_paths, file.create))
 
     templates <- list()
-    templates["foreground"] <- read_lines(find.template("templates", "microservice", "entrypoints", "plumber-foreground.R"))
-    templates["background"] <- read_lines(find.template("templates", "microservice", "entrypoints", "plumber-background.R"))
-    templates["endpoint"]   <- read_lines(find.template("templates", "microservice", "endpoints",   "RESTful.R"))
-    templates["unit_test"]  <- read_lines(find.template("templates", "microservice", "tests",       "test-endpoint-plumber.R"))
+    templates["foreground"]  <- read_lines(find.template("templates", "microservice", "entrypoints", "plumber-foreground.R"))
+    templates["background"]  <- read_lines(find.template("templates", "microservice", "entrypoints", "plumber-background.R"))
+    templates["endpoint"]    <- read_lines(find.template("templates", "microservice", "endpoints",   "RESTful.R"))
+    templates["unit-test"]   <- read_lines(find.template("templates", "microservice", "tests",       "test-endpoint-plumber.R"))
+    templates["helpers-xyz"] <- read_lines(find.template("templates", "microservice", "tests",       "helpers-xyz.R"))
+    templates["setup-xyz"]   <- read_lines(find.template("templates", "microservice", "tests",       "setup-xyz.R"))
+
 
     # Add entrypoint ----------------------------------------------------------
     templates[["foreground"]] %>%
@@ -39,9 +44,15 @@ use_microservice <- function(entrypoint_name = "microservice", endpoint_name = "
 
     # Add unit-test -----------------------------------------------------------
     if(is.not.testing()){#nocov start
-        templates[["unit_test"]] %>%
+        templates[["unit-test"]] %>%
             str_glue(name = endpoint_name) %>%
-            write(file = file_paths[["unit_test"]], append = FALSE, sep = "\n")
+            write(file = file_paths[["unit-test"]], append = FALSE, sep = "\n")
+
+        templates[["helpers-xyz"]] %>%
+            write(file = file_paths[["helpers-xyz"]], append = TRUE, sep = "\n")
+
+        templates[["setup-xyz"]] %>%
+            write(file = file_paths[["setup-xyz"]], append = TRUE, sep = "\n")
     }#nocov end
 
     # Add suggested packages --------------------------------------------------
