@@ -38,9 +38,10 @@ use_microservice <- function(entrypoint_name = "microservice", endpoint_name = "
         write(file = file_paths[["endpoint"]], append = FALSE, sep = "\n")
 
     # Add unit-test -----------------------------------------------------------
-    templates[["unit_test"]] %>%
-        str_glue(name = endpoint_name) %>%
-        write(file = file_paths[["unit_test"]], append = FALSE, sep = "\n")
+    if(is.not.testing())
+        templates[["unit_test"]] %>% # nocov
+        str_glue(name = endpoint_name) %>% # nocov
+        write(file = file_paths[["unit_test"]], append = FALSE, sep = "\n") # nocov
 
     # Add suggested packages --------------------------------------------------
     description <- desc::description$new()

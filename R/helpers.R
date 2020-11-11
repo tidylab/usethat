@@ -1,4 +1,8 @@
 # nocov start
+# predicates --------------------------------------------------------------
+is.testing <- function() identical(Sys.getenv("TESTTHAT"), "true")
+is.not.testing <- Negate(is.testing)
+
 # base --------------------------------------------------------------------
 find.template <- function(...){
     path <- base::system.file(..., package = "usethis2")

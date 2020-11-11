@@ -30,16 +30,6 @@ test_that("create an R script", {
     expect_match(file_content, "class")
 })
 
-test_that("add a unit-test", {
-    attach(test_env)
-    file_path <- file.path(test_wd, "tests", "testthat", paste0("test-endpoint-", endpoint, ".R"))
-    expect_file_exists(file_path)
-    file_content <- readLines(file_path)
-    expect_match(file_content, endpoint)
-    # expect_match(file_content, "healthcheck")
-    # expect_match(file_content, "class")
-})
-
 test_that("add suggested packages to DESCRIPTION", {
     attach(test_env)
     file_path <- file.path(test_wd, "DESCRIPTION")
