@@ -32,4 +32,5 @@ Imports:
     glue,
     magrittr,
     purrr,
-    stringr
+    stringr,
+    snakecase

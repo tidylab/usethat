@@ -1,0 +1,153 @@
+---
+title: "Using a Workflow to Model a Domain"
+bibliography: []
+biblio-style: apalike
+link-citations: yes
+editor_options: 
+  markdown: 
+    wrap: 80
+---
+
+```{r, include = FALSE}
+source(file.path(usethis::proj_get(), "vignettes",  "_common.R"))
+path <- tempfile("docs-")
+dir.create(path, F, T)
+```
+
+## Highlights
+
+-   Create a workflow in R that is readable by a domain expert.
+-   Facilitates the transition between concept to implementation of the domain
+    model.
+
+## What does `use_workflow` do?
+
+Given the workflow name (order one pizza), the sub-domain name (pizza ordering)
+and the number of steps in the workflow (3),
+
+When `use_workflow` is called
+
+```{r, eval = FALSE, echo = TRUE}
+use_workflow(name = "order one pizza", domain = "pizza ordering", n_step = 3)
+```
+
+```{r, eval = TRUE, echo = FALSE}
+withr::with_dir(
+    path,
+    use_workflow(name = "order-one-pizza", domain = "pizza ordering", n_step = 3)
+)
+file_path <- list.files(path, "order-one-pizza.R", recursive = TRUE)
+```
+
+Then the function:
+
+-   Creates a workflow boilerplate with three steps;
+-   Places the file at `r file_path`; and
+-   Opens the file (only in interactive mode).
+
+## What is a Step
+
+-   The input to a step should always be an environment.
+-   The output of a step should always be an environment.
+
+```{r, eval=FALSE, echo=TRUE}
+session <- new.env
+
+step <- function(session){
+  
+  session$system <- list(date = Sys.Date(), os = Sys.info()["sysname"])
+
+  return(session)
+}
+```
+
+## How to Move from Conception to Implementation?
+
+In this section we customise the boilerplate code to fit the application design.
+
+### Iteration 0 - Decompose a Process into Steps
+
+Before you call `use_workflow`, think about the process you are about to model.
+Essentially, you need to decompose the process into sequential steps that
+reflect their relationships and dependencies.
+
+<!-- Steps are formed in the imperative -->
+
+Decomposing a process into steps requires cognitive effort, yet you don't need
+to delve into details in this stage.
+
+```{=html}
+<div class="alert alert-info" <strong="">
+Aim to capure 20% of the steps that are roughly 80% of the process. 
+</div>
+```
+```{=html}
+<div class="alert alert-warning" <strong="">
+Even the best planning is not so omniscient as to get it right the first time.
+</div>
+```
+```{=html}
+<div class="alert alert-danger" <strong="">
+Each step may (but don't have to) be dependent on its predecessors steps.<br>
+Each step must be independent from its succeeding steps.
+</div>
+```
+In our running example, the process of ordering pizza includes, but not limited
+to, three steps:
+
+1.  Issue new order;
+2.  Order pizza; and
+3.  Commit order.
+
+These three necessary steps for ordering pizza happen sequentially in the order
+of their writing. In this case, their order is irreversible, each step is
+dependent on its predecessors steps.
+
+We start the implementation process by generating boilerplate code for a
+workflow that comprises three steps:
+
+The boilerplate code produced by `use_workflow` looks likes this:
+
+```{r code = readLines(fs::path(path, file_path)), eval=FALSE, echo=TRUE}
+```
+
+### Iteration 1 - Rename the Steps
+
+In this iteration we rename the generic names of the steps. Each step name,
+should reveal you why the step exists, what it does and how it is used.
+
+<!-- naming convention -->
+
+```{r}
+writeLines((
+    readLines(fs::path(path, file_path))
+    %>% stringr::str_replace_all("step_1", "issue_new_order")
+    %>% stringr::str_replace_all("step_2", "order_pizza")
+    %>% stringr::str_replace_all("step_3", "commit_order")
+), fs::path(path, file_path))
+```
+
+```{r code = readLines(fs::path(path, file_path)), eval=FALSE, echo=TRUE}
+```
+
+<!-- What makes for a good step name? -->
+
+<!-- If this is your first workflow in the project, strive to create as few elements -->
+
+<!-- as possible, and yet have most of the different element types appear once. For -->
+
+<!-- example, if your domain requires you to fit regression models to five target -->
+
+<!-- variables, that is, you need five model objects, then start by modelling a -->
+
+<!-- single model. Yet, include all the necessary steps to fit the single model. In -->
+
+<!-- this case you may want to have the following steps: -->
+
+### Iteration 2 - ???
+
+<!-- A step is a collection of tasks -->
+
+```{r, message=TRUE}
+message("hello")
+```

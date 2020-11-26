@@ -5,7 +5,7 @@ is.not.testing <- Negate(is.testing)
 
 # base --------------------------------------------------------------------
 find.template <- function(...){
-    path <- base::system.file(..., package = "usethis2")
+    path <- base::system.file(..., package = "ddd")
     if(nchar(path) == 0) path <- base::system.file("inst", ..., package = "usethis2", mustWork = TRUE)
     return(path)
 }
