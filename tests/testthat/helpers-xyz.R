@@ -12,9 +12,17 @@ expect_match <- function(object, regexp) testthat::expect_match(stringr::str_fla
 create_package <- function(path){
     unlink(path, recursive = TRUE, force = TRUE)
     fs::dir_create(path)
-    fs::file_create(file.path(path, "DESCRIPTION"))
-
-    write(c("Package: dummy"), file.path(path, "DESCRIPTION"))
-    invisible()
+    writeLines(c(
+        "Package: dummy.package",
+        "Title: What the Package Does (One Line, Title Case)",
+        "Version: 0.0.0.9000",
+        "Authors@R (parsed):",
+        "    * First Last <first.last@example.com> [aut, cre] (YOUR-ORCID-ID)",
+        "Description: What the package does (one paragraph).",
+        "Encoding: UTF-8",
+        "LazyData: true",
+        "Roxygen: list(markdown = TRUE)",
+        "RoxygenNote: 7.1.1",
+        ""
+    ), file.path(path, "DESCRIPTION"))
 }
-
