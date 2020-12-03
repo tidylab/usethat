@@ -3,21 +3,14 @@ output: github_document
 ---
 
 ```{r setup, echo = FALSE, results = 'hide', message = FALSE, warning = FALSE}
-knitr::opts_chunk$set(
-  echo = TRUE, 
-  message = FALSE,
-  warning = FALSE,
-  fig.align = "center", 
-  out.width = "100%"
-)
-
-pkgload::load_all(usethis::proj_get())
+source(file.path(usethis::proj_get(), "vignettes",  "_common.R"))
 ```
 
 
 # `usethis2` <img src='https://i.imgur.com/sdsO73r.png' align="right" height="75"/>
 
 <!-- badges: start -->
+[![CRAN status](https://www.r-pkg.org/badges/version/usethis2)](https://CRAN.R-project.org/package=usethis2)
 [![test-suite](https://github.com/tidylab/usethis2/workflows/test-suite/badge.svg)](https://github.com/tidylab/usethis2/actions)
 [![code-coverage](https://codecov.io/gh/tidylab/usethis2/branch/master/graph/badge.svg)](https://codecov.io/github/tidylab/usethis2/?branch=master)
 <!-- badges: end -->
@@ -38,7 +31,7 @@ knitr::include_graphics("https://i.imgur.com/RLEQkhe.png")
 
 You can install `usethis2` by using:
 
-```{r, eval=FALSE}
+```{r, eval=FALSE, echo=TRUE}
 install.packages("remotes")
 remotes::install_github("tidylab/usethis2")
 ```

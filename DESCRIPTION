@@ -23,10 +23,14 @@ Depends:
     R (>= 3.5)
 Suggests: 
     testthat,
-    withr
+    withr,
+    rmarkdown
 Imports: 
-    stringr,
-    yaml,
-    purrr,
+    assertthat,
+    desc,
     fs,
-    R6
+    glue,
+    magrittr,
+    purrr,
+    stringr,
+    snakecase
