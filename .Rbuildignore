@@ -17,13 +17,8 @@
 # Files
 ^.*\.Rproj$
 ^\.Rproj\.user$
-^\.travis\.yml$
 ^codecov\.yml$
 ^renv\.lock$
 ^tic\.R$
 ^README\.Rmd$
 ^LICENSE\.md$
-
-# Demo
-demo-.*\.R$
-
