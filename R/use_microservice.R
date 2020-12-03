@@ -8,7 +8,7 @@
 #' @param port (`integer`) a number or integer that indicates the server port
 #'   that should be listened on. Note that on most Unix-like systems including
 #'   Linux and Mac OS X, port numbers smaller than 1025 require root privileges.
-#' @includeRmd vignettes/use_microservice.Rmd
+#' @includeRmd vignettes/articles/use_microservice.Rmd
 #' @family use functions
 #' @return The necessary files for spinning up a microservice at <http://host:port/>
 #' @export
