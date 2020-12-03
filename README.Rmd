@@ -31,7 +31,7 @@ knitr::include_graphics("https://i.imgur.com/RLEQkhe.png")
 
 You can install `usethis2` by using:
 
-```{r, eval=FALSE}
+```{r, eval=FALSE, echo=TRUE}
 install.packages("remotes")
 remotes::install_github("tidylab/usethis2")
 ```

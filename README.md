@@ -25,3 +25,6 @@ Installation
 ------------
 
 You can install `usethis2` by using:
+
+    install.packages("remotes")
+    remotes::install_github("tidylab/usethis2")
