@@ -5,5 +5,5 @@ cat(banner("Unit Tests"))
 test_wd <- tempfile("test-")
 
 # Import internal functions
-filename <- ddd:::filename
-title <- ddd:::title
+filename <- usethis2:::filename
+title <- usethis2:::title

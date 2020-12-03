@@ -7,6 +7,7 @@
 #' @param n_step (`character`) Number of steps that constitute the **Workflow**.
 #' @family use functions
 #' @export
+#' @includeRmd vignettes/articles/use_workflow.Rmd
 use_workflow <- function(name, domain, n_step = 3){
     assert$is_character(name)
     assert$is_character(domain)

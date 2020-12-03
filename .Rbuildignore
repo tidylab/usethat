@@ -13,6 +13,7 @@
 ^docs/
 ^renv/
 ^pkgdown/
+^vignettes/articles/
 
 # Files
 ^.*\.Rproj$
@@ -22,3 +23,5 @@
 ^tic\.R$
 ^README\.Rmd$
 ^LICENSE\.md$
+^vignettes/_common.R$
+^vignettes/references.bib$
