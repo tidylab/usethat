@@ -31,17 +31,21 @@ knitr::opts_chunk$set(
 knitr::knit_hooks$set(
     error = function(x, options) {
         paste('\n\n<div class="alert alert-danger">',
-              gsub('##', '\n', gsub('^##\ Error', '**Error**', x)),
+              x %>%
+              stringr::str_replace_all('^#>\ Error in eval\\(expr, envir, enclos\\):', '**Caution:**'),
               '</div>', sep = '\n')
     },
     warning = function(x, options) {
         paste('\n\n<div class="alert alert-warning">',
-              gsub('##', '\n', gsub('^##\ Warning:', '**Warning**', x)),
+              x %>%
+                  stringr::str_replace_all('##', '\n') %>%
+                  stringr::str_replace_all('^#>\ Warning:', '**Note:**') %>%
+                  stringr::str_remove_all("#>"),
               '</div>', sep = '\n')
     },
     message = function(x, options) {
         paste('\n\n<div class="alert alert-info">',
-              gsub('##|#>', '\n', x),
+              gsub('##|#>', '\n', paste("**Tip:**", x)),
               '</div>', sep = '\n')
     }
 )

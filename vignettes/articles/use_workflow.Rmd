@@ -73,25 +73,26 @@ reflect their relationships and dependencies.
 
 <!-- Steps are formed in the imperative -->
 
+
+
 Decomposing a process into steps requires cognitive effort, yet you don't need
 to delve into details in this stage.
 
-```{=html}
-<div class="alert alert-info" <strong="">
-Aim to capure 20% of the steps that are roughly 80% of the process. 
-</div>
+```{r, message=TRUE}
+message("Aim to capure 20% of the steps that are roughly 80% of the process.")
 ```
-```{=html}
-<div class="alert alert-warning" <strong="">
-Even the best planning is not so omniscient as to get it right the first time.
-</div>
+
+```{r, warning=TRUE}
+warning("Even the best planning is not so omniscient as to get it right the first time.")
 ```
-```{=html}
-<div class="alert alert-danger" <strong="">
-Each step may (but don't have to) be dependent on its predecessors steps.<br>
-Each step must be independent from its succeeding steps.
-</div>
+
+```{r, error=TRUE}
+stop(
+  "Each step may (but don't have to) be dependent on its predecessors steps.",
+  "Each step must be independent from its succeeding steps."
+)
 ```
+
 In our running example, the process of ordering pizza includes, but not limited
 to, three steps:
 
