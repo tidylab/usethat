@@ -33,4 +33,9 @@ Imports:
     magrittr,
     purrr,
     stringr,
-    snakecase
+    snakecase,
+    R6P,
+    ddd
+Remotes:
+    tidylab/R6P,
+    tidylab/ddd
