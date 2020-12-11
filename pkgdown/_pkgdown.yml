@@ -1,0 +1,29 @@
+url: https://tidylab.github.io/usethis2/
+title: "Analytic Project Setup and Development"
+authors:
+  Harel Lustiger:
+    href: https://github.com/harell
+
+# Articles ----------------------------------------------------------------
+articles:
+- title: Develop the Project Core Functionality
+  contents:
+  - '`articles/use_workflow`'
+- title: Add Ports and Adapters to the Project
+  contents:
+  - '`articles/use_microservice`'
+
+# Functions ---------------------------------------------------------------
+# reference:
+# - title: Creational Patterns
+#   desc: >
+#     Creational design patterns abstract the instantiation process.
+#   contents:
+#   - 'Singleton'
+# - title: Object-Relational Patterns
+#   desc: >
+#     Simplify access to data stored in persistent storage of some kind.
+#   contents:
+#   - 'AbstractRepository'
+#   - 'AbstractUnitOfWork'
+

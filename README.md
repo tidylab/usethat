@@ -1,5 +1,5 @@
 
-# `usethis2` <img src='https://i.imgur.com/sdsO73r.png' align="right" height="75"/>
+# `usethis2` <img src="https://raw.githubusercontent.com/tidylab/usethis2/master/pkgdown/logo.png" align="right" height="75"/>
 
 <!-- badges: start -->
 
