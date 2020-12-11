@@ -10,16 +10,19 @@ source(file.path(usethis::proj_get(), "vignettes",  "_common.R"))
 # `usethis2` <img src='https://i.imgur.com/sdsO73r.png' align="right" height="75"/>
 
 <!-- badges: start -->
-[![CRAN status](https://www.r-pkg.org/badges/version/usethis2)](https://CRAN.R-project.org/package=usethis2)
-[![test-suite](https://github.com/tidylab/usethis2/workflows/test-suite/badge.svg)](https://github.com/tidylab/usethis2/actions)
-[![code-coverage](https://codecov.io/gh/tidylab/usethis2/branch/master/graph/badge.svg)](https://codecov.io/github/tidylab/usethis2/?branch=master)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/usethis2)](https://CRAN.R-project.org/package=usethis2)
+[![R build
+status](https://github.com/tidylab/usethis2/workflows/R-CMD-check/badge.svg)](https://github.com/tidylab/usethis2/actions)
+[![codecov](https://codecov.io/gh/tidylab/usethis2/branch/master/graph/badge.svg?token=U6FL5N32FL)](https://codecov.io/gh/tidylab/usethis2)
+
 <!-- badges: end -->
 
 
 `usethis2`
 ---
 
-```{r, echo = FALSE, out.width = "75%"}
+```{r, echo = FALSE, out.width = "100%"}
 knitr::include_graphics("https://i.imgur.com/RLEQkhe.png")
 ```
 
