@@ -1,0 +1,45 @@
+---
+title: "Article Template"
+bibliography: [../../inst/REFERENCES.bib]
+biblio-style: apalike
+link-citations: yes
+editor_options: 
+  markdown: 
+    wrap: 80
+---
+
+```{r, include = FALSE}
+source(file.path(usethis::proj_get(), "vignettes",  "_common.R"))
+```
+
+<!-- One line about what the function does -->
+
+Mediates between the domain and data mapping layers using a collection-like
+interface for accessing domain objects.
+
+<!-- Introduction Visual -->
+
+<!-- Introduction Text -->
+
+## How It Works
+
+## When to Use It
+
+## Example: Name of Example 1
+
+## Example: Name of Example 2
+
+## Further Reading
+
+
+```{r, message=TRUE}
+message("Signifies a tip or suggestion")
+```
+
+```{r, warning=TRUE}
+warning("Signifies a general note")
+```
+
+```{r, error=TRUE}
+stop("Signifies a warning or caution")
+```

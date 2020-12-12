@@ -1,6 +1,6 @@
 ---
 title: "Using a Workflow to Model a Domain"
-bibliography: []
+bibliography: [../../inst/REFERENCES.bib]
 biblio-style: apalike
 link-citations: yes
 editor_options: 
@@ -22,8 +22,8 @@ dir.create(path, F, T)
 
 ## What does `use_workflow` do?
 
-Given the workflow name (order one pizza), the sub-domain name (pizza ordering)
-and the number of steps in the workflow (3),
+Given the workflow `name` (order one pizza), the sub-`domain` name (pizza ordering)
+and the `number of steps` in the workflow (3),
 
 When `use_workflow` is called
 

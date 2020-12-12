@@ -32,7 +32,7 @@ knitr::knit_hooks$set(
     error = function(x, options) {
         paste('\n\n<div class="alert alert-danger">',
               x %>%
-              stringr::str_replace_all('^#>\ Error in eval\\(expr, envir, enclos\\):', '**Caution:**'),
+                  stringr::str_replace_all('^#>\ Error in eval\\(expr, envir, enclos\\):', '**Caution:**'),
               '</div>', sep = '\n')
     },
     warning = function(x, options) {
@@ -51,7 +51,8 @@ knitr::knit_hooks$set(
 )
 
 # helpers -----------------------------------------------------------------
-read_snippet <- function(name) readLines(system.file("inst", "snippets", paste0(name,".R"), package = devtools::loaded_packages()[1,1]))
+read_snippet <- function(name) read_lines(system.file("inst", "snippets", paste0(name,".R"), package = devtools::loaded_packages()[1,1]))
+`%+%` <- base::paste0
 
 # rmarkdown ---------------------------------------------------------------
 kable <- knitr::kable

@@ -1,6 +1,6 @@
 ---
 title: "Using a Microservice"
-bibliography: []
+bibliography: [../../inst/REFERENCES.bib]
 biblio-style: apalike
 link-citations: yes
 editor_options: 
@@ -16,8 +16,8 @@ dir.create(path, F, T)
 
 ## What does `use_microservice` do?
 
-**Given** `entrypoint_name` \<microservice\>, `endpoint_name` <RESTful>, `host`
-name \<localhost\> and `port` number \<8080\>
+**Given** `entrypoint_name` (microservice), `endpoint_name` (RESTful), `host` 
+(127.0.0.1) and `port` number (8080),
 
 **When** `use_microservice` is called
 
@@ -25,7 +25,7 @@ name \<localhost\> and `port` number \<8080\>
 use_microservice(
     entrypoint_name = "microservice", 
     endpoint_name = "RESTful",
-    host = "localhost",
+    host = "127.0.0.1",
     port = 8080             
 )
 ```
@@ -38,7 +38,7 @@ withr::with_envvar(list(TESTTHAT = ""), {
             use_microservice(
                 entrypoint_name = "microservice", 
                 endpoint_name = "RESTful",
-                host = "localhost",
+                host = "127.0.0.1",
                 port = 8080             
             )
         }
@@ -47,7 +47,7 @@ withr::with_envvar(list(TESTTHAT = ""), {
 ```
 
 **Then** the function generates the necessary files for a working-out-of-the-box
-microservice at <http://localhost:8080/>. In particular, the function creates or
+microservice at <http://127.0.0.1:8080/>. In particular, the function creates or
 modifies the following files:
 
 -   `./inst/entrypoints/microservice-foreground.R`
@@ -87,7 +87,7 @@ require.
 
 Firstly, OpenAPI Specification provides visual documentation for the
 Microservice API. If the Microservice is hosted locally on port 8080, then you
-can browse OpenAPI at <http://localhost:8080//__docs__/>.
+can browse OpenAPI at <http://127.0.0.1:8080//__docs__/>.
 
 Second source of documentation is the Microservice unit-test, located at
 `./tests/testthat/test-endpoint-RESTful.R`. The unit-test fully covers the
