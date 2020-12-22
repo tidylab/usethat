@@ -6,12 +6,13 @@ authors:
 
 # Articles ----------------------------------------------------------------
 articles:
-- title: Develop the Project Core Functionality
+- title: Functions Walkthrough
   contents:
-  - '`articles/use_workflow`'
-- title: Add Ports and Adapters to the Project
+  - articles/use_workflow
+  - articles/use_microservice
+- title: Guides and Procedures
   contents:
-  - '`articles/use_microservice`'
+  - articles/modelling_workflows
 
 # Functions ---------------------------------------------------------------
 # reference:
