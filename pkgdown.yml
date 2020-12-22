@@ -1,8 +1,13 @@
 pandoc: 2.7.3
-pkgdown: 1.5.1
+pkgdown: 1.6.1
 pkgdown_sha: ~
 articles:
-  use_microservice: use_microservice.html
-  usethis2: usethis2.html
-last_built: 2020-11-11T20:00Z
+  articles/article_template: article_template.html
+  articles/use_microservice: use_microservice.html
+  articles/use_workflow: use_workflow.html
+  articles/usethis2: usethis2.html
+last_built: 2020-12-22T21:48Z
+urls:
+  reference: https://tidylab.github.io/usethis2//reference
+  article: https://tidylab.github.io/usethis2//articles
 

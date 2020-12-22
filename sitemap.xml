@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://tidylab.github.io/usethis2//index.html</loc>
+  </url>
+  <url>
+    <loc>https://tidylab.github.io/usethis2//reference/use_microservice.html</loc>
+  </url>
+  <url>
+    <loc>https://tidylab.github.io/usethis2//reference/use_workflow.html</loc>
+  </url>
+  <url>
+    <loc>https://tidylab.github.io/usethis2//reference/usethis2-package.html</loc>
+  </url>
+  <url>
+    <loc>https://tidylab.github.io/usethis2//articles/articles/article_template.html</loc>
+  </url>
+  <url>
+    <loc>https://tidylab.github.io/usethis2//articles/articles/use_microservice.html</loc>
+  </url>
+  <url>
+    <loc>https://tidylab.github.io/usethis2//articles/articles/use_workflow.html</loc>
+  </url>
+  <url>
+    <loc>https://tidylab.github.io/usethis2//articles/articles/usethis2.html</loc>
+  </url>
+</urlset>
