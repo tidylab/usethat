@@ -32,6 +32,7 @@ Imports:
     glue,
     magrittr,
     purrr,
+    usethis,
     stringr,
     snakecase,
     R6P,

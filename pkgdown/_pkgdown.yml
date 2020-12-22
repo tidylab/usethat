@@ -12,6 +12,7 @@ articles:
   - articles/use_microservice
 - title: Guides and Procedures
   contents:
+  - articles/create_project
   - articles/modelling_workflows
 
 # Functions ---------------------------------------------------------------
