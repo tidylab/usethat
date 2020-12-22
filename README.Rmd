@@ -1,32 +1,36 @@
 ---
 output: github_document
+bibliography: [./inst/REFERENCES.bib]
+biblio-style: apalike
+link-citations: yes
+editor_options: 
+  canonical: true
+  markdown: 
+    wrap: 80
+    references: 
+      location: section
 ---
 
 ```{r setup, echo = FALSE, results = 'hide', message = FALSE, warning = FALSE}
-knitr::opts_chunk$set(
-  echo = TRUE, 
-  message = FALSE,
-  warning = FALSE,
-  fig.align = "center", 
-  out.width = "100%"
-)
-
-pkgload::load_all(usethis::proj_get())
+source(file.path(usethis::proj_get(), "vignettes",  "_common.R"))
 ```
 
-
-# `usethis2` <img src='https://i.imgur.com/sdsO73r.png' align="right" height="75"/>
+# `usethis2` <img src="https://raw.githubusercontent.com/tidylab/usethis2/master/pkgdown/logo.png" align="right" height="75"/>
 
 <!-- badges: start -->
-[![test-suite](https://github.com/tidylab/usethis2/workflows/test-suite/badge.svg)](https://github.com/tidylab/usethis2/actions)
-[![code-coverage](https://codecov.io/gh/tidylab/usethis2/branch/master/graph/badge.svg)](https://codecov.io/github/tidylab/usethis2/?branch=master)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/usethis2)](https://CRAN.R-project.org/package=usethis2)
+[![R build
+status](https://github.com/tidylab/usethis2/workflows/R-CMD-check/badge.svg)](https://github.com/tidylab/usethis2/actions)
+[![codecov](https://codecov.io/gh/tidylab/usethis2/branch/master/graph/badge.svg?token=U6FL5N32FL)](https://codecov.io/gh/tidylab/usethis2)
+
 <!-- badges: end -->
 
 
 `usethis2`
 ---
 
-```{r, echo = FALSE, out.width = "75%"}
+```{r, echo = FALSE, out.width = "100%"}
 knitr::include_graphics("https://i.imgur.com/RLEQkhe.png")
 ```
 
@@ -38,7 +42,7 @@ knitr::include_graphics("https://i.imgur.com/RLEQkhe.png")
 
 You can install `usethis2` by using:
 
-```{r, eval=FALSE}
+```{r, eval=FALSE, echo=TRUE}
 install.packages("remotes")
 remotes::install_github("tidylab/usethis2")
 ```

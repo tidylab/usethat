@@ -2,7 +2,6 @@
 ^\.dockerignore$
 ^docker-compose\.yml$
 ^R/docker-DockerCompose\.R$
-^tests/testthat/test-docker-DockerCompose\.R$
 
 # Folders
 .*_cache/
@@ -14,16 +13,15 @@
 ^docs/
 ^renv/
 ^pkgdown/
+^vignettes/articles/
 
 # Files
 ^.*\.Rproj$
 ^\.Rproj\.user$
-^\.travis\.yml$
 ^codecov\.yml$
 ^renv\.lock$
 ^tic\.R$
 ^README\.Rmd$
 ^LICENSE\.md$
-
-# Demo
-demo-.*\.R$
+^vignettes/_common.R$
+^vignettes/references.bib$
