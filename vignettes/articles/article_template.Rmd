@@ -33,13 +33,13 @@ interface for accessing domain objects.
 
 
 ```{r, message=TRUE}
-message("Signifies a tip or suggestion")
+message("Signifies a tip or <code>suggestion</code>")
 ```
 
 ```{r, warning=TRUE}
-warning("Signifies a general note")
+warning("Signifies a general <code>note</code>")
 ```
 
 ```{r, error=TRUE}
-stop("Signifies a warning or caution")
+stop("Signifies a warning or <code>caution</code>")
 ```
