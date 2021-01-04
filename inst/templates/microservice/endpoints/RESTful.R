@@ -19,13 +19,3 @@ function(req){
     x <- json %>% jsonlite::fromJSON(flatten = TRUE)
     return(class(x))
 }
-
-#* Anomaly Detection
-#* Return the class of the input.
-#* @post post
-function(req){
-    json <- req$postBody
-    x <- json %>% jsonlite::fromJSON(flatten = TRUE)
-    event_table <- detect_anomalies(x[[1]], x[[2]])
-    return(event_table)
-}
