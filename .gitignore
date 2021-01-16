@@ -12,3 +12,4 @@ renv/
 .Ruserdata
 *.png
 renv.lock
+*.gitkeep

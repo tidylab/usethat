@@ -15,8 +15,6 @@
 ^CRAN-RELEASE$
 ^README\.Rmd$
 ^LICENSE\.md$
-^vignettes/_common.R$
-^vignettes/references.bib$
 
 # Docker
 ^docker-compose\.yml$
@@ -25,6 +23,3 @@
 # pkgdown$
 ^docs$
 ^pkgdown$
-
-
-

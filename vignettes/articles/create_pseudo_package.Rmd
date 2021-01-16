@@ -1,5 +1,5 @@
 ---
-title: "R Projects: A Beginner’s Guide"
+title: "Create Pseudo-Package"
 bibliography: [../../inst/REFERENCES.bib]
 biblio-style: apalike
 link-citations: yes
