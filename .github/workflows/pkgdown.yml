@@ -11,6 +11,7 @@ jobs:
     runs-on: macOS-latest
     env:
       GITHUB_PAT: ${{ secrets.PKGDOWN_PAT }}
+      _R_S3_METHOD_REGISTRATION_NOTE_OVERWRITES_: false
     steps:
       - uses: actions/checkout@v2
 
