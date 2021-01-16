@@ -1,7 +1,7 @@
 # Folders
 .*/
 cache/
-inst/docs/
+docs/
 man/
 vignettes/_cache/
 
