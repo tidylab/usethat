@@ -10,9 +10,20 @@ editor_options:
 
 <!-- One line about what the function does -->
 
-`create_pseudo_package` creates a template project masqueraded as an R project. 
+`create_pseudo_package` creates a template project masqueraded as an R package.
+That means, we develop the R project in an R package-like structure.
 
-* Not just reproducible research
+1.  The advantages of developing an R project as an R package:
+
+    -   aaa
+    -   vvv
+
+2.  The differences between developing an R project and an R package:
+
+    -   sss
+    -   www
+
+-   Not just reproducible research
 
 ```{r, include = FALSE}
 source(file.path(usethis::proj_get(), "vignettes",  "_common.R"))
@@ -33,7 +44,6 @@ usethis::use_testthat()
 ```
 
 ```{r, results='markup'}
-print(usethis:::proj$cur)
 z <- capture.output(fs::dir_tree(path))
 z <- z[-1]
 w <- lapply(
@@ -42,7 +52,4 @@ w <- lapply(
   }
 )
 ```
-
-Mediates between the domain and data mapping layers using a collection-like
-interface for accessing domain objects.
 
