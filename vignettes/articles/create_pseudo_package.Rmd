@@ -8,7 +8,11 @@ editor_options:
     wrap: 80
 ---
 
-# R Projects: A Beginner's Guide {#appendix-r_projects}
+<!-- One line about what the function does -->
+
+`create_pseudo_package` creates a template project masqueraded as an R project. 
+
+* Not just reproducible research
 
 ```{r, include = FALSE}
 source(file.path(usethis::proj_get(), "vignettes",  "_common.R"))
@@ -19,52 +23,26 @@ fs::dir_create(path, recurse = TRUE)
 ## Creating a Standardized Project
 
 ```{r, echo=TRUE, eval=FALSE}
-usethis2::create_project()
+usethis2::create_pseudo_package(path = tempdir())
 ```
 
 ```{r usethis2-create_project, results='hide'}
-withr::with_dir(path, {
-    sapply(
-        paste("package", c("devtools", "usethis"), sep = ":"), 
-        function(name) try(base::detach(name, unload = TRUE, character.only = TRUE), silent = TRUE)
-    )
-    usethis::create_package(path, open = FALSE)
-    usethis::use_testthat()
-})
-suppressWarnings(require(usethis, quietly = TRUE))
+usethis:::proj_set_(path) 
+usethis::create_package(path, open = FALSE)
+usethis::use_testthat()
 ```
 
 ```{r, results='markup'}
-fs::dir_tree(path, recurse = TRUE)
+print(usethis:::proj$cur)
+z <- capture.output(fs::dir_tree(path))
+z <- z[-1]
+w <- lapply(
+  z, function(x){
+    cat(x, "\n")
+  }
+)
 ```
-<!-- One line about what the function does -->
 
 Mediates between the domain and data mapping layers using a collection-like
 interface for accessing domain objects.
 
-<!-- Introduction Visual -->
-
-<!-- Introduction Text -->
-
-## How It Works
-
-## When to Use It
-
-## Example: Name of Example 1
-
-## Example: Name of Example 2
-
-## Further Reading
-
-
-```{r, message=TRUE}
-message("Signifies a tip or suggestion")
-```
-
-```{r, warning=TRUE}
-warning("Signifies a general note")
-```
-
-```{r, error=TRUE}
-stop("Signifies a warning or caution")
-```
