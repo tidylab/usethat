@@ -1,0 +1,73 @@
+---
+title: "Packaging R Projects"
+bibliography: [../../inst/REFERENCES.bib]
+biblio-style: apalike
+link-citations: yes
+editor_options: 
+  markdown: 
+    wrap: 80
+---
+
+<!-- One line about what the function does -->
+
+`create_pseudo_package` creates a template project masqueraded as an R package.
+That means, we develop the R project in an R package-like structure.
+
+1.  The advantages of developing an R project as an R package:
+
+    -   **Familiarity**. If you are already familiar with R packages, then the
+        project's folder structure, components, procedures, and tool set are
+        already known to you.
+    -   **Maturity**. R packages have been developed for decades. As a result,
+        the R community has already spent lots of effort on developing auxiliary
+        packages to facilitate R package development. In addition, there are
+        books, such as [@wickham2015r], that capture the body of knowledge of
+        how to develop R packages. These include both the essentials and good
+        practice that has been evolving for many years.
+
+2.  The differences between developing an R project and an R package:
+
+    -   **Function**. R packages are tools while R projects are services.
+    -   **Protocols**. All R package has to comply with the ***Writing R
+        Extensions*** [@RCoreTeam] protocol. In addition, CRAN packages must
+        comply with even a stricter
+        [protocol](https://cran.r-project.org/web/packages/policies.html). For
+        example, "In principle, packages must pass `R CMD check` without
+        warnings or significant notes to be admitted to the main CRAN package
+        area". In contrast, R projects don't have to comply with any standard or
+        protocol. Instead, it is up to the organisation or programmer, to
+        selectively choose which protocols the project should adhere to.
+    -   **Purpose**. R packages provide tools for solving problems, while R
+        project solves a specific problem, often by importing R packages.
+
+```{r, include = FALSE}
+source(file.path(usethis::proj_get(), "vignettes",  "_common.R"))
+path <- fs::path_tidy(file.path(tempdir(), "template.project"))
+fs::dir_create(path, recurse = TRUE)
+```
+
+## Creating a Standardized Project
+
+```{r, echo=TRUE, eval=FALSE}
+usethis2::create_pseudo_package(path = tempdir())
+```
+
+```{r usethis2-create_project, results='hide'}
+wd <- usethis::proj_get() 
+
+usethis:::proj_set_(path) 
+usethis::create_package(path, open = FALSE)
+usethis::use_testthat()
+
+usethis:::proj_set_(wd)
+```
+
+```{r, results='markup'}
+z <- capture.output(fs::dir_tree(path))
+z <- z[-1]
+w <- lapply(
+  z, function(x){
+    cat(x, "\n")
+  }
+)
+```
