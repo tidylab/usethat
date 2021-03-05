@@ -22,21 +22,6 @@ Language: en-GB
 Depends: 
     R (>= 3.5)
 Suggests: 
-    testthat,
-    withr,
-    rmarkdown
+    testthat
 Imports: 
-    assertthat,
-    desc,
-    fs,
-    glue,
-    magrittr,
-    purrr,
-    usethis,
-    stringr,
-    snakecase,
-    R6P,
-    ddd
-Remotes:
-    tidylab/R6P,
-    tidylab/ddd
+    purrr
