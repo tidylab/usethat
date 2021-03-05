@@ -9,6 +9,10 @@ suppressPackageStartupMessages(
 options(tidyverse.quiet = TRUE)
 
 # knitr -------------------------------------------------------------------
+knitr::opts_knit$set(
+    root.dir = usethis::proj_get()
+)
+
 knitr::opts_chunk$set(
     collapse = TRUE,
     out.width = '100%',
@@ -32,7 +36,8 @@ knitr::knit_hooks$set(
     error = function(x, options) {
         paste('\n\n<div class="alert alert-danger">',
               x %>%
-                  stringr::str_replace_all('^#>\ Error in eval\\(expr, envir, enclos\\):', '**Caution:**'),
+                  stringr::str_replace_all('^.*:', '**Caution:**') %>%
+                  stringr::str_replace_all('#> ', '\n'),
               '</div>', sep = '\n')
     },
     warning = function(x, options) {
@@ -56,4 +61,10 @@ read_snippet <- function(name) read_lines(system.file("inst", "snippets", paste0
 
 # rmarkdown ---------------------------------------------------------------
 kable <- knitr::kable
+
+
+# regex -------------------------------------------------------------------
+discard_comments <- function(string) return(string[!stringr::str_detect(string, "^#")])
+discard_null <- function(string) string[!stringr::str_detect(string, "^NULL")]
+discard_empty_lines <- function(string) string[nchar(string)>0]
 

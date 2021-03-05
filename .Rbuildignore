@@ -15,6 +15,7 @@
 ^CRAN-RELEASE$
 ^README\.Rmd$
 ^LICENSE\.md$
+^vignettes/_common.R$
 
 # Docker
 ^docker-compose\.yml$
