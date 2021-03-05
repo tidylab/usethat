@@ -21,6 +21,10 @@ jobs:
 
       - uses: r-lib/actions/setup-tinytex@v1
 
+      - name: Install system dependencies
+        run: |
+          brew install harfbuzz fribidi libgit2
+
       - name: Prepare
         run: |
           echo "utils::chooseCRANmirror(graphics=FALSE, ind = 1)" > .Rprofile
@@ -28,6 +32,7 @@ jobs:
 
       - name: Query dependencies
         run: |
+          pkgs <- remotes::dev_package_deps(dependencies = TRUE); print(pkgs[order(pkgs$package),])
           saveRDS(remotes::dev_package_deps(dependencies = TRUE), ".github/depends.Rds", version = 2)
           writeLines(sprintf("R-%i.%i", getRversion()$major, getRversion()$minor), ".github/R-version")
         shell: Rscript {0}
@@ -41,9 +46,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          # To get links for homepage
-          remotes::install_cran(c("tidyverse"))
-          remotes::install_cran(c("devtools", "pkgdown", "covr"))
+          sapply(c("tidyverse", "devtools", "pkgdown", "covr"), function(x) try(remotes::install_cran(x)))
           remotes::update_packages("pkgdown")
           remotes::install_deps(dependencies = TRUE)
         shell: Rscript {0}
@@ -51,11 +54,11 @@ jobs:
       - name: Install package
         run: R CMD INSTALL .
 
-      - name: Deploy package
+      - name: Deploy website
         run: |
           git config --local user.email "actions@github.com"
           git config --local user.name "GitHub Actions"
-          Rscript -e 'covr::codecov()'
           Rscript -e 'devtools::document()'
           Rscript -e 'rmarkdown::render("README.Rmd", "md_document")'
           Rscript -e 'pkgdown::deploy_to_branch(new_process = FALSE)'
+          Rscript -e 'covr::codecov(type = "all")'

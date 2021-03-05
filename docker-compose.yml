@@ -3,7 +3,7 @@ services:
   # R Core
   ######################################################
   r-core:
-    image: r/core/package:4.0.2
+    image: r/core/package:4.0.4
     build:
       context: ./
       dockerfile: ./.dev/docker/r-core/Dockerfile
@@ -14,7 +14,7 @@ services:
   # R Development
   ######################################################
   r-develop:
-    image: r/core/package:4.0.2
+    image: r/core/package:4.0.4
     build:
       context: ./
       dockerfile: ./.dev/docker/r-core/Dockerfile
@@ -31,10 +31,10 @@ services:
   # R Testing
   ######################################################
   r-test:
-    image: r/test/package:4.0.2
+    image: r/test/package:4.0.4
     build:
       context: ./
-      dockerfile: ./.dev/docker/r-testing/Dockerfile
+      dockerfile: ./.dev/docker/r-test/Dockerfile
     entrypoint: '/bin/bash'
     container_name: r_test
     restart: "no"

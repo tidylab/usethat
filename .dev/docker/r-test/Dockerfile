@@ -1,5 +1,5 @@
 # R Package Development: Testing------------------------------------------------
-FROM r/core/package:4.0.2
+FROM r/core/package:4.0.4
 RUN touch .Renviron .Rprofile
 RUN echo "" > .Rprofile
 
