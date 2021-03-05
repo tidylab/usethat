@@ -4,7 +4,7 @@ Title: Analytic Project Setup and Development
 URL: https://github.com/tidylab/usethis2
 BugReports: https://github.com/tidylab/usethis2/issues
 Version: 0.1.0
-Date: 2020-07-25
+Date: 2021-02-15
 Authors@R: c(
     person("Harel", "Lustiger", email = "tidylab@gmail.com", role = c("aut", "cre"),
     comment = c(ORCID = "0000-0003-2953-9598"))
