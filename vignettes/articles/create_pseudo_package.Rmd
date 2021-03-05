@@ -8,6 +8,8 @@ editor_options:
     wrap: 80
 ---
 
+Psuado-package makes a good choice as a golden hammer when structuring analytic applications in R.
+
 <!-- One line about what the function does -->
 
 `create_pseudo_package` creates a template project masqueraded as an R package.
