@@ -12,11 +12,97 @@ editor_options:
 source(file.path(usethis::proj_get(), "vignettes",  "_common.R"))
 ```
 
+## Why should I care
+
+The ability to make correct inference on a random variable is influence by the
+variable size. As the variable size gets bigger, our ability to make actionable
+inference increases. For example, measuring people hight and taking the 95 hight
+quantile allows automotive designers to decide on the space required between the
+car seat and its ceiling.
+
+Increasing random variable sizes requires us to devise a strategy for how to
+represent them for further analysis, especially, in the case of multiple random
+variable. For example, say we investigate the relationship of cars'
+specifications and their fuel consumption. We start by taking *Mazda RX4* for a
+ride, and measuring how many miles it covers before it consumes one gallon out
+its 17 gallon fuel tank. The measurement could look something like this:
+
+```{r, echo=TRUE}
+Mazda_RX4 = c(22, 24, 18, 22, 18, 29, 26, 25, 23, 21, 22, 22, 17, 21, 19, 20, 24)
+```
+
+We do the same for the *Datsun 710* 12 gallon fuel tank:
+
+```{r, echo=TRUE}
+Datsun_710 = c(29, 27, 24, 26, 24, 23, 21, 25, 17, 18, 22, 25)
+```
+
+The question then is how to represent the two cars MPG in adjacent to their
+following specifications:
+
+```{r, results='hide'}
+(
+    cars_specs <- mtcars 
+    %>% dplyr::select(-mpg) 
+    %>% tibble::rownames_to_column("model")
+    %>% dplyr::filter(model %in% c("Mazda RX4", "Datsun 710"))
+)
+```
+
+```{r, echo=TRUE}
+print(cars_specs)
+```
+
+
+There are two common ways:
+
+1. Convert each random vector into a point estimator, such as median:
+
+```{r, echo = TRUE}
+cars <- data.frame(mpg = c(median(Mazda_RX4), median(Datsun_710)), cars_specs)
+print(cars)
+```
+
+2. Add an `mpg` column, where each cell is a list contain all the information
+available for a particular car
+
+```{r, echo = TRUE}
+cars <- data.frame(mpg = I(list(Mazda_RX4, Datsun_710)), cars_specs)
+print(cars)
+```
+
+While representing both the MPG measurements and the cars' specification in a
+table is convenient for further analysis, there are drawbacks to consider:
+
+1. The first approach, which is also the most common one, exhibits information
+loss when the variable is compressed into a scalar. As a result of the
+information loss, there is no way to calculate other important statistics such
+as the interquartile range (IQR) or mean.
+
+2. The second approach can be memory/computational prohibitive, especially as
+the number of samples in the random vector increases.
+
+This article suggests a third approach that keeps important information and
+bounds the size of information representation, regardless of the sample size.
+This approach is based on statistical distributions.
+
+
+<!-- using statistical distributions allow us to capture information in a succinct manner. -->
+<!-- A variable of length n, can be compressed to a small set of parameters. For -->
+<!-- example, the normal distribution, takes a variable of 100 numbers, and represent -->
+<!-- it by two parameters, named mu ($\mu$) and sigma ($\sigma$), which correspond to -->
+<!-- the mean and standard deviation of that variable.  -->
+
+
 ## Working with Distribution Objects
 
 ### What is a distribution object?
 
+
+
 ### What operations can we perform on a distribution object?
+
+text
 
 ### How can we include distribution objects in our current workflow?
 
