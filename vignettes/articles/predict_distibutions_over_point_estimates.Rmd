@@ -8,6 +8,8 @@ editor_options:
     wrap: 80
 ---
 
+<!-- Compress random variables into distribution objects -->
+
 ```{r, include = FALSE}
 source(file.path(usethis::proj_get(), "vignettes",  "_common.R"))
 ```
@@ -87,7 +89,7 @@ bounds the size of information representation, regardless of the sample size.
 This approach is based on statistical distributions.
 
 
-<!-- using statistical distributions allow us to capture information in a succinct manner. -->
+<!-- using statistical distributions allows us to capture information in a succinct manner. -->
 <!-- A variable of length n, can be compressed to a small set of parameters. For -->
 <!-- example, the normal distribution, takes a variable of 100 numbers, and represent -->
 <!-- it by two parameters, named mu ($\mu$) and sigma ($\sigma$), which correspond to -->
@@ -98,11 +100,54 @@ This approach is based on statistical distributions.
 
 ### What is a distribution object?
 
+A **distribution object** preserves important statistical qualities of a random
+variable in a succinct manner. Using the
+[`distributional`](https://cran.r-project.org/web/packages/distributional/index.html)
+R package, we can compress the following vector
 
+```{r, echo=TRUE}
+mpg_vec <- c(29, 27, 24, 26, 24, 23, 21, 25, 17, 18, 22, 25)
+print(mpg_vec)
+```
+
+into a **distribution object** on length 1
+
+```{r, echo=TRUE}
+mpg_dist <- distributional::dist_normal(mu = mean(mpg_vec), sigma = sd(mpg_vec))
+print(mpg_dist)
+```
+
+A **distribution object** allows us to move a from `data.frame` with point estimate column into a `data.frame` with a distribution column. 
+For example, instead of compressing the *mpg* measurements of each car in the 'mtcars' dataset into point estimations (the sample mean)
+
+```{r, echo=FALSE}
+(
+  mtcars
+  %>% tibble::rownames_to_column("model")
+  %>% tibble::as_tibble() 
+  %>% dplyr::slice(c(1,3)) 
+)
+```
+
+We can capture more information about the *mpg* measurements by using
+**distribution objects**
+
+```{r, echo=FALSE}
+set.seed(1104)
+(
+  mtcars
+  %>% tibble::rownames_to_column("model")
+  %>% dplyr::rowwise() 
+  %>% dplyr::mutate(mpg = distributional::dist_normal(mpg, round(runif(1, 1,3),1)))
+  %>% dplyr::ungroup()
+  %>% dplyr::slice(c(1,3))
+)
+```
 
 ### What operations can we perform on a distribution object?
 
-text
+If the distribution fits the data well, then perwe can use the **distribution object** to answer 
+
 
 ### How can we include distribution objects in our current workflow?
 
