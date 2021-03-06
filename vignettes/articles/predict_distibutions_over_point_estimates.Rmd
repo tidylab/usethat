@@ -1,0 +1,29 @@
+---
+title: "Predict Distibutions over Point Estimate"
+bibliography: [../../inst/REFERENCES.bib]
+biblio-style: apalike
+link-citations: yes
+editor_options: 
+  markdown: 
+    wrap: 80
+---
+
+```{r, include = FALSE}
+source(file.path(usethis::proj_get(), "vignettes",  "_common.R"))
+```
+
+## Working with Distribution Objects
+
+### What is a distribution object?
+
+### What operations can we perform on a distribution object?
+
+### How can we include distribution objects in our current workflow?
+
+<!-- * distribution objects can be represented in one column of data.frame -->
+
+<!-- * purrr/dplyr operations on a column (e.g. taking the mean as a point estimate) -->
+
+## Generating Distribution Objects
+
+text
