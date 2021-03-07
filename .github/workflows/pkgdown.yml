@@ -46,7 +46,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          sapply(c("tidyverse", "devtools", "pkgdown", "covr"), function(x) try(remotes::install_cran(x)))
+          sapply(c("tidyverse", "tidymodels", "devtools", "pkgdown", "covr"), function(x) try(remotes::install_cran(x)))
           remotes::update_packages("pkgdown")
           remotes::install_deps(dependencies = TRUE)
         shell: Rscript {0}

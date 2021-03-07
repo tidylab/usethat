@@ -14,7 +14,7 @@ editor_options:
 source(file.path(usethis::proj_get(), "vignettes",  "_common.R"))
 ```
 
-## Why should I care?
+## Motivation?
 
 The ability to make correct inference on a random variable is influence by the
 variable size. As the variable size gets bigger, our ability to make actionable
@@ -87,14 +87,6 @@ the number of samples in the random vector increases.
 This article suggests a third approach that keeps important information and
 bounds the size of information representation, regardless of the sample size.
 This approach is based on statistical distributions.
-
-
-<!-- using statistical distributions allows us to capture information in a succinct manner. -->
-<!-- A variable of length n, can be compressed to a small set of parameters. For -->
-<!-- example, the normal distribution, takes a variable of 100 numbers, and represent -->
-<!-- it by two parameters, named mu ($\mu$) and sigma ($\sigma$), which correspond to -->
-<!-- the mean and standard deviation of that variable.  -->
-
 
 ## Working with Distribution Objects
 
@@ -208,7 +200,7 @@ you would do with any other atomic type:
 # Generate a data.frame with distribution objects
 cars <- data.frame(
   model = c("Mazda RX4", "Datsun 710"),
-  mpg = c(distributional::dist_normal(21, 2), distributional::dist_normal(22.8, 2.55))
+  mpg = c(distributional::dist_normal(21, 2), distributional::dist_normal(22.8, 3))
 )
 
 # Extracting 'mpg' mean point estimation
@@ -222,20 +214,81 @@ cars %>%
   dplyr::select(-CI)
 ```
 
-
-
 ```{r, message=TRUE}
 message("See all available operations at [`distributional` package site](https://pkg.mitchelloharawild.com/distributional/).")
 ```
 
 
-
-### How can we include distribution objects in our current workflow?
-
-<!-- * distribution objects can be represented in one column of data.frame -->
-
-<!-- * purrr/dplyr operations on a column (e.g. taking the mean as a point estimate) -->
-
 ## Generating Distribution Objects
 
-text
+### Generating a distribution from point estimation
+
+Compressing a random variable into a point estimation entails information loss.
+It is not possible to restore the original distribution of a random variable
+without prior information. Yet `distributional::dist_degenerate` allows us to
+cast the point estimation into a **distribution object**.
+
+For example, representing the 'mpg' column within the 'mtcars' dataset can be
+achieved by a combination of `dplyr::mutate` and
+`distributional::dist_degenerate`:
+```{r, echo=TRUE}
+mtcars %>% 
+  tibble::as_tibble(rownames = "model") %>% 
+  dplyr::mutate(mpg = distributional::dist_degenerate(mpg)) %>% 
+  head(3)
+```
+
+### Generating a distribution from bootstrap sampling
+
+Steps:
+
+1. Define functions for model fitting and model prediction;
+2. Perform bootstrap sampling on the data;
+3. Compress the data with **distribution objects**; and
+4. Bind the **distribution objects** with the rest of the data.
+
+```{r, echo=TRUE, cache=TRUE}
+# Helpers 
+fit_model <- function(split)
+    lm(formula = mpg ~ ., data = rsample::analysis(split)) 
+
+predict_model <- function(split, mdl)
+    predict(object = mdl, newdata = rsample::assessment(split))
+
+# Generate a distribution for mpg via linear regression and bootstrap sampling
+set.seed(1623)
+
+sampler <- rsample::bootstraps(mtcars, times = 200)
+
+sampler$mdl <- purrr::map(sampler$splits, fit_model)
+
+sampler$fit <- purrr::map2(sampler$splits, sampler$mdl, predict_model)
+
+(
+  mpg_distribution <- sampler$fit
+  %>% dplyr::bind_rows()
+  %>% tidyr::pivot_longer(dplyr::everything())  
+  %>% tidyr::drop_na(value) 
+  %>% dplyr::rename(model = name) 
+  %>% dplyr::group_by(model)  
+  %>% dplyr::summarise(
+    mpg = distributional::dist_normal(mu = mean(value), sigma = sd(value))
+  )
+)
+
+# Bind mpg distribution objects with cars specification
+(
+  dplyr::left_join(
+    tibble::as_tibble(mtcars, rownames = "model") %>% dplyr::select(-mpg),
+    mpg_distribution
+  ) 
+  %>% dplyr::select(model, mpg, dplyr::everything()) 
+  %>% head(3)
+)
+```
+
+
+
+<!-- lm predict se.fit = FALSE -->
+
+<!-- lm predict se.fit = TRUE -->
