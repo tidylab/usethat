@@ -23,6 +23,7 @@ Depends:
     R (>= 3.5)
 Suggests: 
     testthat,
-    distributional
+    distributional,
+    MASS
 Imports: 
     purrr

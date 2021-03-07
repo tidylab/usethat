@@ -14,7 +14,9 @@ editor_options:
 source(file.path(usethis::proj_get(), "vignettes",  "_common.R"))
 ```
 
-## Motivation?
+## Motivation
+
+<!-- Problem statement -->
 
 The ability to make correct inference on a random variable is influence by the
 variable size. As the variable size gets bigger, our ability to make actionable
@@ -25,61 +27,64 @@ car seat and its ceiling.
 Increasing random variable sizes requires us to devise a strategy for how to
 represent them for further analysis, especially, in the case of multiple random
 variable. For example, say we investigate the relationship of cars'
-specifications and their fuel consumption. We start by taking *Mazda RX4* for a
-ride, and measuring how many miles it covers before it consumes one gallon out
-its 17 gallon fuel tank. The measurement could look something like this:
+specifications and their fuel consumption measured in miles per gallon [MPG].
+Here we focus on the $1^{st}$ and $3^{rd}$ cars in the 'mtcars' dataset.
+
+```{r, echo=TRUE}
+cars <- mtcars[c(1,3), ] %>% tibble::rownames_to_column("model")
+print(cars)
+```
+
+```{r, echo = FALSE, out.width = "100%"}
+knitr::include_graphics("https://imgur.com/nEnp4Os.png")
+```
+
+We start by taking *Mazda RX4* for a ride, and measuring how many miles it
+covers before it consumes one gallon. We drive until the car consumes its 17 gallons fuel tank. The MPG measurement is:
 
 ```{r, echo=TRUE}
 Mazda_RX4 = c(22, 24, 18, 22, 18, 29, 26, 25, 23, 21, 22, 22, 17, 21, 19, 20, 24)
 ```
 
-We do the same for the *Datsun 710* 12 gallon fuel tank:
+We do the same for the *Datsun 710* 12 gallons fuel tank:
 
 ```{r, echo=TRUE}
 Datsun_710 = c(29, 27, 24, 26, 24, 23, 21, 25, 17, 18, 22, 25)
 ```
 
 The question then is how to represent the two cars MPG in adjacent to their
-following specifications:
-
-```{r, results='hide'}
-(
-    cars_specs <- mtcars 
-    %>% dplyr::select(-mpg) 
-    %>% tibble::rownames_to_column("model")
-    %>% dplyr::filter(model %in% c("Mazda RX4", "Datsun 710"))
-)
-```
+specifications:
 
 ```{r, echo=TRUE}
+cars_specs <- cars %>% dplyr::select(-mpg) 
 print(cars_specs)
 ```
 
+There are two common approaches:
 
-There are two common ways:
-
-1. Convert each random vector into a point estimator, such as median:
+1. Convert each random vector into a point estimate with an estimator such
+as the median:
 
 ```{r, echo = TRUE}
 cars <- data.frame(mpg = c(median(Mazda_RX4), median(Datsun_710)), cars_specs)
 print(cars)
 ```
 
-2. Add an `mpg` column, where each cell is a list contain all the information
-available for a particular car
+2. Add an `mpg` column, where each cell is a list containing all the information
+available for a particular car:
 
 ```{r, echo = TRUE}
 cars <- data.frame(mpg = I(list(Mazda_RX4, Datsun_710)), cars_specs)
 print(cars)
 ```
 
-While representing both the 'mpg' measurements and the cars' specification in a
+While representing both the MPG measurements and the cars' specification in a
 table is convenient for further analysis, there are some drawbacks to consider:
 
 1. The first approach, which is also the most common one, exhibits information
-loss when the variable is compressed into a scalar. As a result of the
-information loss, there is no way to calculate other important statistics such
-as the interquartile range (IQR) or mean.
+loss when the vector is compressed into a scalar. As a result of the information
+loss, there is no way to calculate other important statistics such as the
+interquartile range (IQR) or mean.
 
 2. The second approach can be memory/computational prohibitive, especially as
 the number of samples in the random vector increases.
@@ -102,7 +107,7 @@ mpg_vec <- c(29, 27, 24, 26, 24, 23, 21, 25, 17, 18, 22, 25)
 print(mpg_vec)
 ```
 
-into a **distribution object** on length 1
+into a **distribution object** of length 1
 
 ```{r, echo=TRUE}
 mpg_dist <- distributional::dist_normal(mu = mean(mpg_vec), sigma = sd(mpg_vec))
@@ -151,9 +156,12 @@ Firstly, you can easily move from a **distribution object** into a point estimat
 using `distributional` functions:
 
 ```{r, echo=TRUE}
+# MPG measurements in a vector 
 mpg_vec <- c(29, 27, 24, 26, 24, 23, 21, 25, 17, 18, 22, 25)
+# MPG measurements in a distribution object
 mpg_dist <- distributional::dist_normal(mu = mean(mpg_vec), sigma = sd(mpg_vec))
 
+# Comparison of vector-wise and distribution-wise operations
 mean(mpg_vec); mean(mpg_dist)
 median(mpg_vec); median(mpg_dist)
 var(mpg_vec); distributional::variance(mpg_dist)
@@ -183,7 +191,8 @@ distributional::hilo(mpg_dist, size = 95) %>% round()
 warning("Use `distributional::new_hilo` if you need a different type of confidence interval")
 ```
 
-```{r}
+```{r, echo=TRUE}
+# instantiate a z-confidence interval of type `hilo`
 z_ci <- distributional::new_hilo(
   lower = mean(mpg_vec) - 1.96 * sd(mpg_vec)/sqrt(length(mpg_vec)),
   upper = mean(mpg_vec) + 1.96 * sd(mpg_vec)/sqrt(length(mpg_vec)),
@@ -202,20 +211,20 @@ cars <- data.frame(
   model = c("Mazda RX4", "Datsun 710"),
   mpg = c(distributional::dist_normal(21, 2), distributional::dist_normal(22.8, 3))
 )
+print(cars)
 
 # Extracting 'mpg' mean point estimation
-cars %>% 
-  dplyr::mutate(mpg = mean(mpg))
+cars %>% dplyr::mutate(mpg = mean(mpg))
 
 # Extracting 'mpg' 95% confidence interval
 cars %>% 
   dplyr::mutate(CI = distributional::hilo(mpg, 95)) %>% 
-  dplyr::mutate(CI_LB = CI$lower, CI_UB = CI$upper) %>% 
+  dplyr::mutate(CI_LB = round(CI$lower), CI_UB = round(CI$upper)) %>% 
   dplyr::select(-CI)
 ```
 
 ```{r, message=TRUE}
-message("See all available operations at [`distributional` package site](https://pkg.mitchelloharawild.com/distributional/).")
+message("See all available operations on the [`distributional` package website](https://pkg.mitchelloharawild.com/distributional/).")
 ```
 
 
@@ -235,27 +244,27 @@ achieved by a combination of `dplyr::mutate` and
 mtcars %>% 
   tibble::as_tibble(rownames = "model") %>% 
   dplyr::mutate(mpg = distributional::dist_degenerate(mpg)) %>% 
-  head(3)
+  dplyr::filter(model %in% c("Mazda RX4", "Datsun 710"))
 ```
 
 ### Generating a distribution from bootstrap sampling
 
 Steps:
 
-1. Define functions for model fitting and model prediction;
+1. Define functions for (a) model fitting, and (b) model prediction;
 2. Perform bootstrap sampling on the data;
 3. Compress the data with **distribution objects**; and
 4. Bind the **distribution objects** with the rest of the data.
 
 ```{r, echo=TRUE, cache=TRUE}
-# Helpers 
+# Step 1: define functions for (a) model fitting, and (b) model prediction 
 fit_model <- function(split)
-    lm(formula = mpg ~ ., data = rsample::analysis(split)) 
+  lm(formula = mpg ~ ., data = rsample::analysis(split)) 
 
 predict_model <- function(split, mdl)
-    predict(object = mdl, newdata = rsample::assessment(split))
+  predict(object = mdl, newdata = rsample::assessment(split))
 
-# Generate a distribution for mpg via linear regression and bootstrap sampling
+# Step 2: Perform bootstrap sampling on the data
 set.seed(1623)
 
 sampler <- rsample::bootstraps(mtcars, times = 200)
@@ -264,31 +273,96 @@ sampler$mdl <- purrr::map(sampler$splits, fit_model)
 
 sampler$fit <- purrr::map2(sampler$splits, sampler$mdl, predict_model)
 
+# Step 3: Compress the data with distribution objects
 (
   mpg_distribution <- sampler$fit
   %>% dplyr::bind_rows()
   %>% tidyr::pivot_longer(dplyr::everything())  
-  %>% tidyr::drop_na(value) 
+  %>% dplyr::mutate(value = ifelse(value <= 0, NA_real_, value)) # MPG is strictly positive
+  %>% tidyr::drop_na(value) # drop former non-positive MPG values
   %>% dplyr::rename(model = name) 
-  %>% dplyr::group_by(model)  
+  %>% dplyr::group_by(model) # calculate MPG mean and standard deviation for each car 
+  %>% dplyr::summarise(mu = mean(value), sigma = sd(value))
+  %>% dplyr::mutate(mpg = distributional::dist_normal(mu = mu, sigma = sigma))
+  %>% dplyr::select(-mu, -sigma)
+  %>% dplyr::filter(model %in% c("Mazda RX4", "Datsun 710"))
+)
+
+# Step 4: Bind MPG distribution objects with cars specification
+(
+  tibble::as_tibble(mtcars, rownames = "model") %>% dplyr::select(-mpg)
+  %>% dplyr::left_join(mpg_distribution) 
+  %>% dplyr::select(model, mpg, dplyr::everything()) 
+)
+```
+
+Alternatively, we can fit a [Gamma distribution](https://en.wikipedia.org/wiki/Gamma_distribution) to the data
+
+```{r, echo=TRUE, cache=TRUE}
+(
+  mpg_distribution <- sampler$fit
+  %>% dplyr::bind_rows()
+  %>% tidyr::pivot_longer(dplyr::everything())
+  %>% dplyr::mutate(value = ifelse(value <= 0, NA_real_, value))
+  %>% tidyr::drop_na(value)
+  %>% dplyr::rename(model = name)
+  %>% dplyr::group_by(model)
   %>% dplyr::summarise(
-    mpg = distributional::dist_normal(mu = mean(value), sigma = sd(value))
+    estimate = list(MASS::fitdistr(value, densfun = "gamma")$estimate),
+    mpg = distributional::dist_gamma(
+      shape = estimate[[1]][1], 
+      rate = estimate[[1]][2]
+    )
   )
 )
 
 # Bind mpg distribution objects with cars specification
 (
-  dplyr::left_join(
-    tibble::as_tibble(mtcars, rownames = "model") %>% dplyr::select(-mpg),
-    mpg_distribution
-  ) 
+  tibble::as_tibble(mtcars, rownames = "model") %>% dplyr::select(-mpg)
+  %>% dplyr::left_join(mpg_distribution) 
   %>% dplyr::select(model, mpg, dplyr::everything()) 
-  %>% head(3)
+  %>% dplyr::filter(model %in% c("Mazda RX4", "Datsun 710"))
 )
 ```
 
+### Generating a distribution from point estimation and standard deviation
 
+Some learning algorithms, such as `lm`, can provide both the standard deviation
+and the mean of a prediction. Using this information alleviates the generation
+of **distribution objects**:
 
-<!-- lm predict se.fit = FALSE -->
+```{r, echo=TRUE}
+# Split the data into train and test sets. 
+train_set <- mtcars[c(-1, -3),]
+test_set <- mtcars[c(1, 3),] # 1 = Mazda RX4, 3 = Datsun 710
 
-<!-- lm predict se.fit = TRUE -->
+# Fit a linear regression model on the train set
+mdl <- lm(formula = mpg ~ ., data = train_set)
+```
+
+Reading `predict.lm` help file, we see an option to report the standard error of predictions
+
+```{r, echo = FALSE, out.width = "70%"}
+knitr::include_graphics("https://i.imgur.com/1bcFZSG.png")
+```
+
+We set `se.fit = TRUE` and predict the test set
+
+```{r, echo=TRUE}
+# Predict the test set
+y_hat <- predict.lm(object = mdl, newdata = test_set, se.fit = TRUE)
+y_hat
+```
+
+Finally, we instantiate normal **distribution objects** and put them inside a `data.frame` using `enframe`:
+
+```{r, echo=TRUE}
+# Create a data.frame with the prediction distribution using the prediction
+# point estimate (fit) and its associated standard deviation (se.fit)
+(
+    distributional::dist_normal(mu = y_hat$fit, sigma = y_hat$se.fit) 
+    %>% tibble::enframe(name = "model", value = "mpg")
+    %>% dplyr::bind_cols(test_set %>% dplyr::select(-mpg))
+)
+```      
+
