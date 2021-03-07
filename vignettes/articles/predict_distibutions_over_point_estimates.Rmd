@@ -14,7 +14,7 @@ editor_options:
 source(file.path(usethis::proj_get(), "vignettes",  "_common.R"))
 ```
 
-## Why should I care
+## Why should I care?
 
 The ability to make correct inference on a random variable is influence by the
 variable size. As the variable size gets bigger, our ability to make actionable
@@ -73,8 +73,8 @@ cars <- data.frame(mpg = I(list(Mazda_RX4, Datsun_710)), cars_specs)
 print(cars)
 ```
 
-While representing both the MPG measurements and the cars' specification in a
-table is convenient for further analysis, there are drawbacks to consider:
+While representing both the 'mpg' measurements and the cars' specification in a
+table is convenient for further analysis, there are some drawbacks to consider:
 
 1. The first approach, which is also the most common one, exhibits information
 loss when the variable is compressed into a scalar. As a result of the
@@ -117,10 +117,18 @@ mpg_dist <- distributional::dist_normal(mu = mean(mpg_vec), sigma = sd(mpg_vec))
 print(mpg_dist)
 ```
 
-A **distribution object** allows us to move a from `data.frame` with point estimate column into a `data.frame` with a distribution column. 
-For example, instead of compressing the *mpg* measurements of each car in the 'mtcars' dataset into point estimations (the sample mean)
+```{r, warning=TRUE}
+warning("By using the normal distribution, a random variable of **any length** can be summarised by **two parameters**, the sample mean and standard deviation.")
+```
+
+
+A **distribution object** allows us to move a from `data.frame` with point
+estimate column into a `data.frame` with a distribution column. For example,
+instead of compressing the 'mpg' measurements of each car in the 'mtcars'
+dataset into point estimations (the sample mean)
 
 ```{r, echo=FALSE}
+data(mtcars, package = "datasets")
 (
   mtcars
   %>% tibble::rownames_to_column("model")
@@ -144,9 +152,82 @@ set.seed(1104)
 )
 ```
 
+
 ### What operations can we perform on a distribution object?
 
-If the distribution fits the data well, then perwe can use the **distribution object** to answer 
+Firstly, you can easily move from a **distribution object** into a point estimate by
+using `distributional` functions:
+
+```{r, echo=TRUE}
+mpg_vec <- c(29, 27, 24, 26, 24, 23, 21, 25, 17, 18, 22, 25)
+mpg_dist <- distributional::dist_normal(mu = mean(mpg_vec), sigma = sd(mpg_vec))
+
+mean(mpg_vec); mean(mpg_dist)
+median(mpg_vec); median(mpg_dist)
+var(mpg_vec); distributional::variance(mpg_dist)
+
+quantile(mpg_vec, p=0.75)[[1]]; quantile(mpg_dist, p=0.75)
+min(mpg_vec); quantile(mpg_dist, p=0.01) # min approximation
+max(mpg_vec); quantile(mpg_dist, p=0.99) # max approximation
+```
+
+Second, you can easily move from a **distribution object** into *Confidence Intervals* by using `distributional::hilo`:
+
+```{r, echo=TRUE}
+# z-confidence interval
+c(
+  mean(mpg_vec) - 1.96 * sd(mpg_vec)/sqrt(length(mpg_vec)),
+  mean(mpg_vec) + 1.96 * sd(mpg_vec)/sqrt(length(mpg_vec))
+) %>% round()
+
+# quantile confidence interval
+quantile(mpg_vec, probs = c(0.025, 0.975)) %>% round()
+
+# distributional employs quantile confidence interval rather than z-confidence interval
+distributional::hilo(mpg_dist, size = 95) %>% round()
+```
+
+```{r, warning=TRUE}
+warning("Use `distributional::new_hilo` if you need a different type of confidence interval")
+```
+
+```{r}
+z_ci <- distributional::new_hilo(
+  lower = mean(mpg_vec) - 1.96 * sd(mpg_vec)/sqrt(length(mpg_vec)),
+  upper = mean(mpg_vec) + 1.96 * sd(mpg_vec)/sqrt(length(mpg_vec)),
+  size = 95
+)
+
+print(z_ci)
+```
+
+Finally, you can work with **distribution objects** stored in a data.frame as
+you would do with any other atomic type:
+
+```{r, echo=TRUE}
+# Generate a data.frame with distribution objects
+cars <- data.frame(
+  model = c("Mazda RX4", "Datsun 710"),
+  mpg = c(distributional::dist_normal(21, 2), distributional::dist_normal(22.8, 2.55))
+)
+
+# Extracting 'mpg' mean point estimation
+cars %>% 
+  dplyr::mutate(mpg = mean(mpg))
+
+# Extracting 'mpg' 95% confidence interval
+cars %>% 
+  dplyr::mutate(CI = distributional::hilo(mpg, 95)) %>% 
+  dplyr::mutate(CI_LB = CI$lower, CI_UB = CI$upper) %>% 
+  dplyr::select(-CI)
+```
+
+
+
+```{r, message=TRUE}
+message("See all available operations at [`distributional` package site](https://pkg.mitchelloharawild.com/distributional/).")
+```
+
 
 
 ### How can we include distribution objects in our current workflow?
