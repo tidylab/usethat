@@ -18,6 +18,31 @@ source(file.path(usethis::proj_get(), "vignettes",  "_common.R"))
 
 <!-- Problem statement -->
 
+Prediction is an error-prone activity. Depending on the business context, it may
+be desirable to quantify the uncertainty using prediction intervals. Or,
+different error types, i.e. under/over prediction, may be associated with
+different costs. Thus, in some cases, biasing the model towards conservative
+prediction might be translated into avoidance/favouring of one error type over
+another.
+
+At the stage of making predictions, typically and most often by default,
+predictions are represented by a point estimation, such as the mean or median.
+This is because representing each prediction as one number is convenient, even
+though there is more information available at the stage of making the
+prediction.
+
+The problem is that representing prediction by merely a point estimation does
+not allow us to model the uncertainty of that prediction. Thus, if one needs to
+consider the uncertainty of the estimated value, e.g. for building prediction
+intervals, one has to revamp the data structure and codebase of the application
+to accommodate the new requirements. Doing so might entail (potentially
+prohibitive) effort spent refactoring and communicating the changes with
+other programmers. Therefore, new features that incorporate prediction
+uncertainty might either get skipped or delayed until the changes are ready.
+
+
+## Typical Approaches for Representing Random Variables
+
 The ability to make correct inference on a random variable is influence by the
 variable size. As the variable size gets bigger, our ability to make actionable
 inference increases. For example, measuring people hight and taking the 95 hight
@@ -365,4 +390,16 @@ Finally, we instantiate normal **distribution objects** and put them inside a `d
     %>% dplyr::bind_cols(test_set %>% dplyr::select(-mpg))
 )
 ```      
+
+## Conclusion
+
+Prediction is an error-prone activity. Unless there is a business requirement
+that prohibits you from storing each prediction's distribution, storing merely
+point estimations is a premature decision.
+
+Instead, using **distribution objects** makes your code structure independent of
+business requirements that involve the consideration of prediction uncertainty.
+With **distribution objects**, you can (a) defer the decision about which point
+estimator to use; and (b) provide additional statical estimators such as
+prediction intervals.
 
