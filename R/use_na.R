@@ -6,20 +6,14 @@
 #'   comes with several useful NA values such as `NA_list_`, `NA_Date_` and
 #'   `NA_POSIXct_`.
 #'
-#' @details The function copies a file to '\code{path}/utils-na.R', which contains:
-#'
-#' * `define_na_class()` a helper function to construct NA of arbitrary classes.
-#' * Several pre-defined NA values, such as `NA_list_` and `NA_Date_`.
+#' @details The function copies a file with several NA values to '\code{path}/utils-na.R'.
 #'
 #' @param path (`character`) Path of file to copy.
 #'
 #' @return No return value, called for side effects.
 #' @export
-#'
-#' @examples
-#' use_na(path = tempdir())
-#'
 use_na <- function(path = "R"){
+    dir.create(path, showWarnings = FALSE, recursive = TRUE)
     usethis::use_template(
         template = "misc/utils-na.R",
         save_as = file.path(path, "utils-na.R"),
