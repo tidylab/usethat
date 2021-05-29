@@ -3,7 +3,7 @@ Type: Package
 Title: Analytic Project Setup and Development
 URL: https://github.com/tidylab/usethis2
 BugReports: https://github.com/tidylab/usethis2/issues
-Version: 0.1.0
+Version: 0.1.1
 Date: 2021-02-15
 Authors@R: c(
     person("Harel", "Lustiger", email = "tidylab@gmail.com", role = c("aut", "cre"),

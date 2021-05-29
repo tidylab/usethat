@@ -11,5 +11,5 @@ renv/
 .RData
 .Ruserdata
 *.png
-renv.lock
-*.gitkeep
+CRAN-RELEASE
+cran-comments.md
