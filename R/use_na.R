@@ -12,6 +12,9 @@
 #'
 #' @return No return value, called for side effects.
 #' @export
+#' @example
+#' use_na(path = "R")
+#' if(interactive()) browser(file.path(path, "utils-na.R"))
 use_na <- function(path = "R"){
     dir.create(path, showWarnings = FALSE, recursive = TRUE)
     usethis::use_template(
