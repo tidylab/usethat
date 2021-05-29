@@ -2,6 +2,5 @@
 
 export("%>%")
 export("%||%")
-export(define_na_class)
 importFrom(purrr,"%>%")
 importFrom(purrr,"%||%")
