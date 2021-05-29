@@ -3,15 +3,15 @@ title: "Analytic Project Setup and Development"
 authors:
   Harel Lustiger:
     href: https://github.com/harell
+  Tidylab:
+    href: "https://github.com/tidylab"
+    html: "<img src='https://github.com/tidylab/tidylab/blob/master/favicon/apple-touch-icon-120x120.png?raw=true' height=24>"
 
 # Articles ----------------------------------------------------------------
-articles:
-- title: Develop the Project Core Functionality
-  contents:
-  - '`articles/use_workflow`'
-- title: Add Ports and Adapters to the Project
-  contents:
-  - '`articles/use_microservice`'
+#articles:
+#- title: Good Practice
+#  contents:
+#  - articles/predict_distibutions_over_point_estimates
 
 # Functions ---------------------------------------------------------------
 # reference:

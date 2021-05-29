@@ -1,16 +1,14 @@
 # Folders
-.dev/
-.git/
-.Rproj.user/
+.*/
 cache/
-inst/docs/
+docs/
 man/
 vignettes/_cache/
 
 # Files
+.*
+!.Rbuildignore
 ^docker-compose.yml$
-^/.Rprofile$
-^/.Renviron$
 
 # Demo
 ./R/demo-*

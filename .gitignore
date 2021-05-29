@@ -5,9 +5,11 @@ renv/
 *_cache/
 
 # Files
+.Renviron
 .Rproj.user
 .Rhistory
 .RData
 .Ruserdata
 *.png
-renv.lock
+CRAN-RELEASE
+cran-comments.md

@@ -3,37 +3,17 @@ assign(".Rprofile", new.env(), envir = globalenv())
 # .First ------------------------------------------------------------------
 .First <- function(){
     try(if(testthat::is_testing()) return())
+    try(readRenviron(".Renviron"), silent = TRUE)
 
     # Package Management System
     Date <- as.character(read.dcf("DESCRIPTION", "Date"));
     URL <- if(is.na(Date)) "https://cran.rstudio.com/" else paste0("https://mran.microsoft.com/snapshot/", Date)
     options(repos = URL)
-
-    suppressMessages(try({renv::consent(provided = TRUE); unlink("./renv")}))
-    options(
-        renv.lockfile = "renv.lock",
-        renv.consent = TRUE,
-        renv.clean = FALSE,
-        renv.settings = list(
-            ignored.packages = c("renv"),
-            snapshot.type = "explicit",
-            auto.snapshot = FALSE,
-            package.dependency.fields = c("Imports", "Depends", "LinkingTo", "Suggests")[1:3],
-            vcs.ignore.library = TRUE,
-            use.cache = TRUE
-        )
-    )
-
-    # Programming Logic
-    pkgs <- c("usethis", "devtools", "magrittr", "testthat")
-    invisible(sapply(pkgs, require, warn.conflicts = FALSE, character.only = TRUE))
 }
 
 # .Last -------------------------------------------------------------------
 .Last <- function(){
     try(if(testthat::is_testing()) return())
-
-    unlink("./renv", recursive = TRUE)
     try(system('docker-compose down'), silent = TRUE)
 }
 
@@ -44,7 +24,7 @@ assign(".Rprofile", new.env(), envir = globalenv())
     define_service <- paste0("service = c(", paste0(paste0("'",service,"'"), collapse = ", "),")")
     define_service <- if(is.null(service)) "service = NULL" else define_service
     writeLines(c(
-        "source('./R/docker-DockerCompose.R')",
+        "source('./R/utils-DockerCompose.R')",
         define_service,
         "DockerCompose$new()$browse_url(service)"), path_script)
     .Rprofile$utils$run_script(path_script, job_name)
@@ -56,7 +36,7 @@ assign(".Rprofile", new.env(), envir = globalenv())
     define_service <- paste0("service <- c(", paste0(paste0("'",service,"'"), collapse = ", "),")")
     define_service <- if(is.null(service)) "service = NULL" else define_service
     writeLines(c(
-        "source('./R/docker-DockerCompose.R')",
+        "source('./R/utils-DockerCompose.R')",
         define_service,
         "DockerCompose$new()$start(service)"), path_script)
     .Rprofile$utils$run_script(path_script, job_name)
@@ -65,7 +45,7 @@ assign(".Rprofile", new.env(), envir = globalenv())
 .Rprofile$docker$stop <- function(){
     path_script <- tempfile("system-", fileext = ".R")
     job_name <- paste("Testing", as.character(read.dcf('DESCRIPTION', 'Package')), "in a Docker Container")
-    writeLines(c("source('./R/docker-DockerCompose.R'); DockerCompose$new()$stop()"), path_script)
+    writeLines(c("source('./R/utils-DockerCompose.R'); DockerCompose$new()$stop()"), path_script)
     .Rprofile$utils$run_script(path_script, job_name)
 }
 
@@ -75,7 +55,7 @@ assign(".Rprofile", new.env(), envir = globalenv())
     define_service <- paste0("service <- c(", paste0(paste0("'",service,"'"), collapse = ", "),")")
     define_service <- if(is.null(service)) "service = NULL" else define_service
     writeLines(c(
-        "source('./R/docker-DockerCompose.R')",
+        "source('./R/utils-DockerCompose.R')",
         define_service,
         "DockerCompose$new()$restart(service)"), path_script)
     .Rprofile$utils$run_script(path_script, job_name)
@@ -84,7 +64,7 @@ assign(".Rprofile", new.env(), envir = globalenv())
 .Rprofile$docker$reset <- function(){
     path_script <- tempfile("system-", fileext = ".R")
     job_name <- paste("Testing", as.character(read.dcf('DESCRIPTION', 'Package')), "in a Docker Container")
-    writeLines(c("source('./R/docker-DockerCompose.R'); DockerCompose$new()$reset()"), path_script)
+    writeLines(c("source('./R/utils-DockerCompose.R'); DockerCompose$new()$reset()"), path_script)
     .Rprofile$utils$run_script(path_script, job_name)
 }
 
