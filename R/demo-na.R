@@ -1,8 +1,25 @@
+#' @title Various 'Not Available' / Missing Values
+#' @description R comes with several built-in NA constants, including `NA`
+#'   (logical), `NA_integer_`, `NA_real_`, `NA_complex_` and `NA_character_`.
+#'   Similarly, we can define NA values that are associated with other classes,
+#'   such as, `NA_Date_` and `NA_list_`.
+#' @name na_utiles
+#' @return Predefined constant.
+NULL
+
 # Timedate ----------------------------------------------------------------
+#' @rdname na_utiles
+#' @export
 NA_Date_ <- structure(NA_real_, class = "Date")
+#' @rdname na_utiles
+#' @export
 NA_POSIXct_ <- structure(.POSIXct(NA_real_, tz = "UTC"), class = c("POSIXct", "POSIXt"))
 
 
 # Arrays ------------------------------------------------------------------
+#' @rdname na_utiles
+#' @export
 NA_list_ <- structure(list(), class = "list")
-NA_data.frame <- structure(data.frame(), class = "data.frame")
+#' @rdname na_utiles
+#' @export
+NA_data.frame_ <- structure(data.frame(), class = "data.frame")
