@@ -8,18 +8,25 @@
 #'
 #' @details The function copies a file with several NA values to '\code{path}/utils-na.R'.
 #'
-#' @param path (`character`) Path of file to copy.
+#' @param path (`character`) A path pointing at where to copy the file.
 #'
 #' @return No return value, called for side effects.
 #' @export
-#' @example
-#' use_na(path = "R")
-#' if(interactive()) browser(file.path(path, "utils-na.R"))
+#' @examples
+#' path <- tempfile()
+#' use_na(path)
+#' print(readLines(file.path(path, "utils-na.R")))
+#'
 use_na <- function(path = "R"){
+    withr::local_options(list(usethis.quiet = TRUE))
+    wd <- getwd()
+    withr::defer(usethis::proj_set(wd, force = TRUE))
     dir.create(path, showWarnings = FALSE, recursive = TRUE)
+
+    usethis::proj_set(path, force = TRUE)
     usethis::use_template(
         template = "misc/utils-na.R",
-        save_as = file.path(path, "utils-na.R"),
+        save_as = "utils-na.R",
         open = FALSE,
         package = "usethis2"
     )

@@ -1,7 +1,7 @@
 .onAttach <- function(lib, pkg,...){#nocov start
-    options(
-        usethis.quiet = TRUE
-    )
+    # options(
+    #     usethis.quiet = TRUE
+    # )
 
 
     # packageStartupMessage(
