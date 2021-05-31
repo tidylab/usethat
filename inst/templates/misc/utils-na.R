@@ -7,19 +7,16 @@
 #' @return Predefined constant.
 NULL
 
+
 # Timedate ----------------------------------------------------------------
-#' @rdname na_utiles
-#' @export
+{{tags}}
 NA_Date_ <- structure(NA_real_, class = "Date")
-#' @rdname na_utiles
-#' @export
+{{tags}}
 NA_POSIXct_ <- structure(.POSIXct(NA_real_, tz = "UTC"), class = c("POSIXct", "POSIXt"))
 
 
 # Arrays ------------------------------------------------------------------
-#' @rdname na_utiles
-#' @export
+{{tags}}
 NA_list_ <- structure(list(), class = "list")
-#' @rdname na_utiles
-#' @export
+{{tags}}
 NA_data.frame_ <- structure(data.frame(), class = "data.frame")

@@ -6,9 +6,12 @@
 #'   comes with several useful NA values such as `NA_list_`, `NA_Date_` and
 #'   `NA_POSIXct_`.
 #'
-#' @details The function copies a file with several NA values to '\code{path}/utils-na.R'.
+#' @details The function copies a file with several NA values to
+#'   '\code{path}/utils-na.R'.
 #'
 #' @param path (`character`) A path pointing at where to copy the file.
+#' @param export If `TRUE`, the file different `NA` values in
+#'   '\code{path}/utils-na.R' are exported to `NAMESPACE`.
 #'
 #' @return No return value, called for side effects.
 #' @export
@@ -17,18 +20,16 @@
 #' use_na(path)
 #' print(readLines(file.path(path, "utils-na.R")))
 #'
-use_na <- function(path = "R"){
-    withr::local_options(list(usethis.quiet = TRUE))
-    wd <- getwd()
-    withr::defer(usethis::proj_set(wd, force = TRUE))
-    dir.create(path, showWarnings = FALSE, recursive = TRUE)
+use_na <- function(path = "R", export = TRUE){
+    tags <- c("#' @rdname na_utiles", "#' @export")
+    tags <- if(export) tags else tags[1]
 
-    usethis::proj_set(path, force = TRUE)
-    usethis::use_template(
+    use_template(
         template = "misc/utils-na.R",
-        save_as = "utils-na.R",
-        open = FALSE,
-        package = "usethis2"
+        save_as = file.path(path, "utils-na.R"),
+        data = list(tags = paste0(tags, collapse = "\n")),
+        open = FALSE
     )
+
     invisible()
 }
