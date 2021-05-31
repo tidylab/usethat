@@ -2,5 +2,6 @@
 
 export("%>%")
 export("%||%")
+export(use_na)
 importFrom(purrr,"%>%")
 importFrom(purrr,"%||%")

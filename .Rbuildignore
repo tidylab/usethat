@@ -16,6 +16,8 @@
 ^README\.Rmd$
 ^LICENSE\.md$
 ^vignettes/_common.R$
+^R/demo-.*
+^tests/testthat/test-demo-.*
 
 # Docker
 ^docker-compose\.yml$

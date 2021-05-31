@@ -24,4 +24,6 @@ Depends:
 Suggests: 
     testthat
 Imports: 
-    purrr
+    purrr,
+    usethis,
+    withr
