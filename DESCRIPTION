@@ -1,6 +1,6 @@
 Package: usethis2
 Type: Package
-Title: Analytic Project Setup and Development
+Title: Automate Analytic Project Setup and Development
 URL: https://github.com/tidylab/usethis2
 BugReports: https://github.com/tidylab/usethis2/issues
 Version: 0.1.1
@@ -24,6 +24,7 @@ Depends:
 Suggests: 
     testthat
 Imports: 
+    microservices (>= 0.1.2),
     purrr,
     usethis,
     withr

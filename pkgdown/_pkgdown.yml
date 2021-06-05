@@ -14,16 +14,13 @@ authors:
 #  - articles/predict_distibutions_over_point_estimates
 
 # Functions ---------------------------------------------------------------
-# reference:
-# - title: Creational Patterns
-#   desc: >
-#     Creational design patterns abstract the instantiation process.
-#   contents:
-#   - 'Singleton'
-# - title: Object-Relational Patterns
-#   desc: >
-#     Simplify access to data stored in persistent storage of some kind.
-#   contents:
-#   - 'AbstractRepository'
-#   - 'AbstractUnitOfWork'
+reference:
+- title: Deploy a Microservice
+  contents:
+  - 'use_microservice'
+  - 'add_service'
+- title: Project setup
+  contents:
+  - 'use_na'
+  # - 'use_pipes'
 
