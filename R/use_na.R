@@ -10,8 +10,7 @@
 #'   '\code{path}/utils-na.R'.
 #'
 #' @param path (`character`) A path pointing at where to copy the file.
-#' @param export If `TRUE`, the file different `NA` values in
-#'   \code{path}/\code{utils-na.R} are exported to `NAMESPACE`.
+#' @param export If `TRUE`, the file content is exported to `NAMESPACE`.
 #'
 #' @return No return value, called for side effects.
 #' @export

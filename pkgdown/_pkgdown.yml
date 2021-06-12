@@ -22,5 +22,5 @@ reference:
 - title: Project setup
   contents:
   - 'use_na'
-  # - 'use_pipes'
+  - 'use_pipes'
 

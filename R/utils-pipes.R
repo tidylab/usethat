@@ -1,19 +1,19 @@
-#' Pipe operator
+#' Forward pipe operator
 #'
 #' @name %>%
-#' @rdname pipe
 #' @keywords internal
-#' @export
 #' @importFrom purrr %>%
 #' @usage lhs \%>\% rhs
+#' @rdname pipes
+#' @export
 NULL
 
 #' NULL operator
 #'
 #' @name %||%
-#' @rdname pipe
 #' @keywords internal
-#' @export
 #' @importFrom purrr %||%
 #' @usage x \%||\% y
+#' @rdname pipes
+#' @export
 NULL

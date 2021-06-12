@@ -8,12 +8,8 @@ use_template <- function(
     open = FALSE,
     package = "usethis2")
 {
-    withr::local_options(list(usethis.quiet = TRUE))
-    wd <- getwd()
-    withr::defer(usethis::proj_set(wd, force = TRUE))
     dir.create(dirname(save_as), showWarnings = FALSE, recursive = TRUE)
-    usethis::proj_set(dirname(save_as), TRUE)
-
+    usethis::local_project(path = dirname(save_as), force = TRUE, setwd = FALSE)
     usethis::use_template(
         template = template,
         save_as = basename(save_as),
