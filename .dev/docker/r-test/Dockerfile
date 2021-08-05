@@ -22,7 +22,6 @@ WORKDIR ${R_USER}/${R_PACKAGE_NAME}
 # Test-Suite -------------------------------------------------------------------
 RUN R -q -e "system.time(devtools::document())"
 RUN R -q -e "system.time(devtools::check(error_on = 'note'))"
-# RUN R -q -e "system.time(testthat::test_package(read.dcf('DESCRIPTION', 'Package')[[1]]))"
 RUN R -q -e "system.time({\
                devtools::load_all(export_all = FALSE, helpers = FALSE);\
                testthat::test_dir('./tests/testthat', stop_on_failure = TRUE)\

@@ -1,7 +1,7 @@
 Package: usethis2
 Type: Package
 Title: Automate Analytic Project Setup and Development
-URL: https://github.com/tidylab/usethis2
+URL: https://tidylab.github.io/usethis2/, https://github.com/tidylab/usethis2
 BugReports: https://github.com/tidylab/usethis2/issues
 Version: 0.2.0
 Date: 2021-08-01
@@ -15,7 +15,6 @@ Description: Automate analytic project setup tasks that are otherwise performed
     more.
 License: MIT + file LICENSE
 Encoding: UTF-8
-LazyData: true
 RoxygenNote: 7.1.1
 Roxygen: list(markdown = TRUE, r6 = TRUE)
 Language: en-GB

@@ -20,6 +20,7 @@
 #' print(readLines(file.path(path, "utils-na.R")))
 #'
 use_na <- function(path = "R", export = TRUE){
+    withr::local_options(list(usethis.quiet = TRUE))
     tags <- c("#' @rdname na_utiles", "#' @export")
     tags <- if(export) tags else tags[1]
 
