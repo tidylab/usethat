@@ -1,6 +1,6 @@
 #nocov start
 # use_microservice --------------------------------------------------------
-#' @inherit microservices::add_service title details return examples
+#' @inherit microservices::add_service title details return
 #' @inheritParams microservices::add_service
 #' @family microservice utilities
 #' @export
@@ -8,7 +8,7 @@ use_microservice <- microservices::add_service
 
 
 # add_service -------------------------------------------------------------
-#' @inherit microservices::add_service title details return examples
+#' @inherit microservices::add_service title details return
 #' @inheritParams microservices::add_service
 #' @family microservice utilities
 #' @export
