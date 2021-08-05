@@ -4,6 +4,21 @@
     <loc>https://tidylab.github.io/usethis2//index.html</loc>
   </url>
   <url>
-    <loc>https://tidylab.github.io/usethis2//reference/pipe.html</loc>
+    <loc>https://tidylab.github.io/usethis2//reference/add_service.html</loc>
+  </url>
+  <url>
+    <loc>https://tidylab.github.io/usethis2//reference/pipes.html</loc>
+  </url>
+  <url>
+    <loc>https://tidylab.github.io/usethis2//reference/use_microservice.html</loc>
+  </url>
+  <url>
+    <loc>https://tidylab.github.io/usethis2//reference/use_na.html</loc>
+  </url>
+  <url>
+    <loc>https://tidylab.github.io/usethis2//reference/use_pipes.html</loc>
+  </url>
+  <url>
+    <loc>https://tidylab.github.io/usethis2//reference/usethis2-package.html</loc>
   </url>
 </urlset>

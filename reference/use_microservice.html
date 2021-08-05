@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Lay the foundations of a Microservice — use_microservice • Analytic Project Setup and Development</title>
+<title>Add a Service Route to the Microservice — use_microservice • Analytic Project Setup and Development</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,8 @@
 
 
 
-<meta property="og:title" content="Lay the foundations of a Microservice — use_microservice" />
-<meta property="og:description" content="Generate boiler plate code for a microservice that works out-of-the-box." />
+<meta property="og:title" content="Add a Service Route to the Microservice — use_microservice" />
+<meta property="og:description" content="Add a Service Route to the Microservice" />
 
 
 
@@ -79,7 +79,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Analytic Project Setup and Development</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
       </span>
     </div>
 
@@ -92,13 +92,7 @@
   </a>
 </li>
 <li>
-  <a href="../articles/articles/usethis2.html">Get started</a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
-</li>
-<li>
-  <a href="../articles/index.html">Articles</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -121,175 +115,73 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Lay the foundations of a Microservice</h1>
-    <small class="dont-index">Source: <a href='https://github.com/tidylab/usethis2/blob/master/R/use_microservice.R'><code>R/use_microservice.R</code></a></small>
+    <h1>Add a Service Route to the Microservice</h1>
+    <small class="dont-index">Source: <a href='https://github.com/tidylab/usethis2/blob/master/R/microservices.R'><code>R/microservices.R</code></a></small>
     <div class="hidden name"><code>use_microservice.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Generate boiler plate code for a microservice that works out-of-the-box.</p>
+    <p>Add a Service Route to the Microservice</p>
     </div>
 
-    <pre class="usage"><span class='fu'>use_microservice</span><span class='op'>(</span>
-  entrypoint_name <span class='op'>=</span> <span class='st'>"microservice"</span>,
-  endpoint_name <span class='op'>=</span> <span class='st'>"RESTful"</span>,
-  host <span class='op'>=</span> <span class='st'>"localhost"</span>,
-  port <span class='op'>=</span> <span class='fl'>8080</span>
-<span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>use_microservice</span><span class='op'>(</span>path <span class='op'>=</span> <span class='st'>"."</span>, <span class='va'>name</span>, overwrite <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>entrypoint_name</th>
-      <td><p>(<code>character</code>) Entrypoint name.</p></td>
+      <th>path</th>
+      <td><p>(<code>character</code>) Where is the project root folder?</p></td>
     </tr>
     <tr>
-      <th>endpoint_name</th>
-      <td><p>(<code>character</code>) Endpoint name.</p></td>
+      <th>name</th>
+      <td><p>(<code>character</code>) what is the service route name? For example, if
+<code>name</code> = "repository" then the set of services would become available
+at <code>http://127.0.0.1:8080/repository/</code>.</p></td>
     </tr>
     <tr>
-      <th>host</th>
-      <td><p>(<code>character</code>) a string that is a valid IPv4 or IPv6 address that
-is owned by this server, which the application will listen on. "0.0.0.0"
-represents all IPv4 addresses and "::/0" represents all IPv6 addresses.</p></td>
-    </tr>
-    <tr>
-      <th>port</th>
-      <td><p>(<code>integer</code>) a number or integer that indicates the server port
-that should be listened on. Note that on most Unix-like systems including
-Linux and Mac OS X, port numbers smaller than 1025 require root privileges.</p></td>
+      <th>overwrite</th>
+      <td><p>(<code>logical</code>) Should existing destination files be overwritten?</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>The necessary files for spinning up a microservice at <a href='http://host:port/'>http://host:port/</a></p>
+    <p>No return value, called for side effects.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    
-<h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>What does <code>use_microservice</code> do?</h3>
+    <p>Lay the infrastructure for an additional set of services. That includes
+adding a unit test, adding an endpoint, and extending the entrypointy.
+<div class="alert alert-warning"></p>
+
+<p><strong>Note:</strong> <code>add_service</code> adds a service to pre-existing plumber
+microservice which you could deploy by calling <code>use_microservice</code>.
+</div></p>
+<h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>How It Works</h3>
 
 
-<p><strong>Given</strong> <code>entrypoint_name</code> (microservice), <code>endpoint_name</code> (RESTful),
-<code>host</code> (127.0.0.1) and <code>port</code> number (8080),</p>
-<p><strong>When</strong> <code>use_microservice</code> is called<div class="r"></p><pre><span class='fu'>use_microservice</span><span class='op'>(</span>
-    entrypoint_name <span class='op'>=</span> <span class='st'>"microservice"</span>, 
-    endpoint_name <span class='op'>=</span> <span class='st'>"RESTful"</span>,
-    host <span class='op'>=</span> <span class='st'>"127.0.0.1"</span>,
-    port <span class='op'>=</span> <span class='fl'>8080</span>             
-<span class='op'>)</span>
+<p>Given a <code>path</code> (.) to a folder and a <code>name</code> (repository)</p>
+<p>When <code>add_service</code> is called</p>
+<p>Then the function creates the following files:<div class="r"></p><pre><span class='va'>tests</span><span class='op'>/</span><span class='va'>testthat</span><span class='op'>/</span><span class='va'>test</span><span class='op'>-</span><span class='va'>endpoint</span><span class='op'>-</span><span class='va'>plumber</span><span class='op'>-</span><span class='va'>repository.R</span>
+<span class='va'>inst</span><span class='op'>/</span><span class='va'>endpoints</span><span class='op'>/</span><span class='va'>plumber</span><span class='op'>-</span><span class='va'>repository.R</span>
 </pre><p></div></p>
-<p><strong>Then</strong> the function generates the necessary files for a
-working-out-of-the-box microservice at <a href='http://127.0.0.1:8080/'>http://127.0.0.1:8080/</a>. In
-particular, the function creates or modifies the following files:</p><ul>
-<li><p><code>./inst/entrypoints/microservice-foreground.R</code></p></li>
-<li><p><code>./inst/entrypoints/microservice-background.R</code></p></li>
-<li><p>.<code>/inst/endpoints/RESTful.R</code></p></li>
-<li><p><code>./tests/testthat/test-endpoint-RESTful.R</code></p></li>
-<li><p><code>./tests/testthat/helpers-xyz.R</code></p></li>
-<li><p><code>./tests/testthat/setup-xyz.R</code></p></li>
-<li><p><code>./DESCRIPTION</code></p></li>
+<p>And updates the following files:<div class="r"></p><pre><span class='va'>inst</span><span class='op'>/</span><span class='va'>entrypoints</span><span class='op'>/</span><span class='va'>plumber</span><span class='op'>-</span><span class='va'>foreground.R</span>
+</pre><p></div></p>
+
+<h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>When to Use</h3>
+
+
+<p>In scenarios where services are thematically linked to each other.
+Examples for themes that should be mounted separately:</p><ul>
+<li><p>‘forecasting’ and ‘anomaly detection’</p></li>
+<li><p>‘user’ and ‘business’</p></li>
 </ul>
 
-
-<h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Spinning up the Microservice</h3>
-
-
-<p>Running the Microservice is done by one of two scripts:</p><ul>
-<li><p><code>inst/entrypoints/microservice-foreground.R</code> runs the Microservice
-at the foreground. This option is appropriate during production.
-However, running the Microservice at this mode means the R session
-is locked and would not process CLI or other scripts commands until
-the Microservice is stopped.</p></li>
-<li><p><code>inst/entrypoints/microservice-background.R</code>runs the Microservice at
-the</p></li>
-</ul>
-
-<p>background as an RStudio job. This option is appropriate during
-development. Running the Microservice at this mode allows the programmer
-to interact with the Microservice by sending it HTTP requests within the
-same R session.</p>
-
-<h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Discovering the Microservice Details</h3>
-
-
-<p>Communicating with the Microservice is done through HTTP requests. This
-means you need to know what URL exists, what service they provide, and
-what input they require.</p>
-<p>Firstly, OpenAPI Specification provides visual documentation for the
-Microservice API. If the Microservice is hosted locally on port 8080,
-then you can browse OpenAPI at <a href='http://127.0.0.1:8080//__docs__/'>http://127.0.0.1:8080//__docs__/</a>.</p>
-<p>Second source of documentation is the Microservice unit-test, located at
-<code>./tests/testthat/test-endpoint-RESTful.R</code>. The unit-test fully covers
-the available services, demonstrates how to send HTTP requests, and
-provides examples of how to post-process the returned response into an R
-<code>data.frame</code>.</p>
-
-<h3 class='hasAnchor' id='arguments'><a class='anchor' href='#arguments'></a>Developing and Testing Endpoints</h3>
-
-
-<p><code>use_microservice</code> automatically generates endpoint unit-test that is
-useful both for developing and testing the API. The boilerplate code of
-the unit-test looks like:<div class="r"></p><pre><span class='fu'>context</span><span class='op'>(</span><span class='st'>"unit test for RESTful endpoint"</span><span class='op'>)</span>
-
-<span class='co'># Setup -------------------------------------------------------------------</span>
-<span class='fu'>testthat</span><span class='fu'>::</span><span class='fu'><a href='https://testthat.r-lib.org/reference/teardown.html'>setup</a></span><span class='op'>(</span><span class='op'>{</span>
-    <span class='co'>## Capture API Information</span>
-    <span class='co'># httptest::.mockPaths(file.path(usethis::proj_get(), 'tests', 'api'))</span>
-    <span class='co'># httptest::start_capturing()</span>
-    <span class='co'># local_mock(with_mock_api = function(expr) eval(expr), .env = "httptest")</span>
-    <span class='co'># GET &lt;&lt;- function(...) httptest::capture_requests(httr::GET(...))</span>
-    <span class='co'># POST &lt;&lt;- function(...) httptest::capture_requests(httr::POST(...))</span>
-<span class='op'>}</span><span class='op'>)</span>
-
-<span class='co'># healthcheck -------------------------------------------------------------</span>
-<span class='fu'>httptest</span><span class='fu'>::</span><span class='fu'>with_mock_api</span><span class='op'>(</span><span class='op'>{</span>
-    <span class='fu'>test_that</span><span class='op'>(</span><span class='st'>"healthcheck returns a success"</span>, <span class='op'>{</span>
-        <span class='va'>url</span> <span class='op'>&lt;-</span> <span class='fu'>generate_url</span><span class='op'>(</span><span class='va'>config</span><span class='op'>$</span><span class='va'>host</span>, <span class='va'>config</span><span class='op'>$</span><span class='va'>port</span>, <span class='st'>"utility/healthcheck"</span><span class='op'>)</span>
-        <span class='fu'>expect_status_200</span><span class='op'>(</span><span class='fu'>GET</span><span class='op'>(</span><span class='va'>url</span><span class='op'>)</span><span class='op'>)</span>
-    <span class='op'>}</span><span class='op'>)</span>
-<span class='op'>}</span><span class='op'>)</span>
-
-<span class='co'># class -------------------------------------------------------------------</span>
-<span class='fu'>httptest</span><span class='fu'>::</span><span class='fu'>with_mock_api</span><span class='op'>(</span><span class='op'>{</span>
-    <span class='fu'>describe</span><span class='op'>(</span><span class='st'>"class"</span>, <span class='op'>{</span>
-        <span class='fu'>it</span><span class='op'>(</span><span class='st'>"POST with character returns a character"</span>, <span class='op'>{</span>
-            <span class='va'>input</span> <span class='op'>&lt;-</span> <span class='st'>"Hello World!"</span>
-            <span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'>jsonlite</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/jsonlite/man/fromJSON.html'>toJSON</a></span><span class='op'>(</span><span class='va'>input</span>, auto_unbox <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-            <span class='va'>url</span> <span class='op'>&lt;-</span> <span class='fu'>generate_url</span><span class='op'>(</span><span class='va'>config</span><span class='op'>$</span><span class='va'>host</span>, <span class='va'>config</span><span class='op'>$</span><span class='va'>port</span>, <span class='st'>"utility/class"</span><span class='op'>)</span>
-            <span class='fu'>expect_status_200</span><span class='op'>(</span><span class='va'>response</span> <span class='op'>&lt;-</span> <span class='fu'>POST</span><span class='op'>(</span><span class='va'>url</span>, body <span class='op'>=</span> <span class='va'>x</span><span class='op'>)</span><span class='op'>)</span>
-
-            <span class='va'>output</span> <span class='op'>&lt;-</span>
-                <span class='fu'>extract_content_text</span><span class='op'>(</span><span class='va'>response</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-                <span class='fu'>jsonlite</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/jsonlite/man/fromJSON.html'>fromJSON</a></span><span class='op'>(</span>flatten <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-                <span class='fu'>stringr</span><span class='fu'>::</span><span class='fu'><a href='https://stringr.tidyverse.org/reference/str_remove.html'>str_remove_all</a></span><span class='op'>(</span><span class='st'>'\"'</span><span class='op'>)</span>
-            <span class='fu'>expect_match</span><span class='op'>(</span><span class='va'>output</span>, <span class='st'>"character"</span><span class='op'>)</span>
-        <span class='op'>}</span><span class='op'>)</span>
-
-        <span class='fu'>it</span><span class='op'>(</span><span class='st'>"POST with data.frame returns a data.frame"</span>, <span class='op'>{</span>
-            <span class='va'>input</span> <span class='op'>&lt;-</span> <span class='va'>mtcars</span>
-            <span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'>jsonlite</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/jsonlite/man/fromJSON.html'>toJSON</a></span><span class='op'>(</span><span class='va'>input</span>, auto_unbox <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-            <span class='va'>url</span> <span class='op'>&lt;-</span> <span class='fu'>generate_url</span><span class='op'>(</span><span class='va'>config</span><span class='op'>$</span><span class='va'>host</span>, <span class='va'>config</span><span class='op'>$</span><span class='va'>port</span>, <span class='st'>"utility/class"</span><span class='op'>)</span>
-            <span class='fu'>expect_status_200</span><span class='op'>(</span><span class='va'>response</span> <span class='op'>&lt;-</span> <span class='fu'>POST</span><span class='op'>(</span><span class='va'>url</span>, body <span class='op'>=</span> <span class='va'>x</span><span class='op'>)</span><span class='op'>)</span>
-
-            <span class='va'>output</span> <span class='op'>&lt;-</span>
-                <span class='fu'>extract_content_text</span><span class='op'>(</span><span class='va'>response</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-                <span class='fu'>jsonlite</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/jsonlite/man/fromJSON.html'>fromJSON</a></span><span class='op'>(</span>flatten <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-                <span class='fu'>stringr</span><span class='fu'>::</span><span class='fu'><a href='https://stringr.tidyverse.org/reference/str_remove.html'>str_remove_all</a></span><span class='op'>(</span><span class='st'>'\"'</span><span class='op'>)</span>
-            <span class='fu'>expect_match</span><span class='op'>(</span><span class='va'>output</span>, <span class='st'>"data.frame"</span><span class='op'>)</span>
-        <span class='op'>}</span><span class='op'>)</span>
-    <span class='op'>}</span><span class='op'>)</span>
-<span class='op'>}</span><span class='op'>)</span>
-
-<span class='co'># Teardown ----------------------------------------------------------------</span>
-<span class='fu'>testthat</span><span class='fu'>::</span><span class='fu'><a href='https://testthat.r-lib.org/reference/teardown.html'>teardown</a></span><span class='op'>(</span><span class='op'>{</span><span class='fu'>httptest</span><span class='fu'>::</span><span class='fu'>stop_capturing</span><span class='op'>(</span><span class='op'>)</span><span class='op'>}</span><span class='op'>)</span>
-</pre><p></div></p>
 
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>Other use functions: 
-<code><a href='use_workflow.html'>use_workflow</a>()</code></p></div>
+    <div class='dont-index'><p>Other microservice utilities: 
+<code><a href='add_service.html'>add_service</a>()</code></p></div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
