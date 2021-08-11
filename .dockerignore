@@ -13,3 +13,5 @@ vignettes/_cache/
 # Demo
 ./R/demo-*
 ./tests/testthat/test-demo-*
+./R/internal-.*
+./tests/testthat/test-internal-.*

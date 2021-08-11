@@ -5,6 +5,7 @@
 ^data-raw/
 ^inst/snippets/
 ^renv/
+^revdep/
 ^vignettes/
 
 # Files
@@ -16,6 +17,8 @@
 ^README\.Rmd$
 ^LICENSE\.md$
 ^vignettes/_common.R$
+^R/demo-.*
+^tests/testthat/test-demo-.*
 
 # Docker
 ^docker-compose\.yml$

@@ -2,5 +2,9 @@
 
 export("%>%")
 export("%||%")
+export(add_service)
+export(use_microservice)
+export(use_na)
+export(use_pipes)
 importFrom(purrr,"%>%")
 importFrom(purrr,"%||%")

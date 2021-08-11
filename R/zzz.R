@@ -1,10 +1,5 @@
 .onAttach <- function(lib, pkg,...){#nocov start
-    options(
-        usethis.quiet = TRUE
-    )
-
-    try(
-        packageStartupMessage(
+    if(interactive()) packageStartupMessage(
             paste(
                 "\n\033[44m\033[37m",
                 "\nWelcome to usethis2",
@@ -12,6 +7,5 @@
                 "\nhttps://tidylab.github.io/usethis2/",
                 "\n\033[39m\033[49m",
                 sep="")
-        )
     )
 }#nocov end
