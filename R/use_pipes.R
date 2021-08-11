@@ -24,6 +24,7 @@
 #' print(readLines(file.path(path, "utils-pipes.R")))
 #'
 use_pipes <- function(path = "R", export = TRUE){
+    withr::local_options(list(usethis.quiet = TRUE))
     tags <- c("#' @rdname pipes", "#' @export")
     tags <- if(export) tags else tags[1]
 

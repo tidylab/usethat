@@ -8,6 +8,11 @@
 NULL
 
 
+# Atoms -------------------------------------------------------------------
+{{tags}}
+NA_numeric_ <- structure(NA_real_, class = c("integer", "numeric"))
+
+
 # Timedate ----------------------------------------------------------------
 {{tags}}
 NA_Date_ <- structure(NA_real_, class = "Date")
