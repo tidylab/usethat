@@ -1,4 +1,4 @@
 library(testthat)
-library(usethis2)
+library(usethat)
 
-test_check("usethis2")
+test_check("usethat")

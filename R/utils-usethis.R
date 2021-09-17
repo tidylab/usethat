@@ -6,7 +6,7 @@ use_template <- function(
     data = list(),
     ignore = FALSE,
     open = FALSE,
-    package = "usethis2")
+    package = "usethat")
 {
     dir.create(dirname(save_as), showWarnings = FALSE, recursive = TRUE)
     usethis::local_project(path = dirname(save_as), force = TRUE, setwd = FALSE)

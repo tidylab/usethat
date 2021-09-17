@@ -1,23 +1,23 @@
 # https://astrostatistics.psu.edu/su07/R/library/utils/html/citEntry.html
 bibentry("Manual",
-         title = "usethis2: Analytic Project Setup and Development",
+         title = "usethat: Analytic Project Setup and Development",
          author = person("Harel", "Lustiger"),
          organization = "Tidylab",
          address      = "Auckland, New Zealand",
          year         = version$year,
-         url          = "https://github.com/tidylab/usethis2",
+         url          = "https://github.com/tidylab/usethat",
 
          textVersion =
          paste("Harel Lustiger (", version$year, "). ",
-               "usethis2: Analytic Project Setup and Development. ",
+               "usethat: Analytic Project Setup and Development. ",
                "Tidylab, Auckland, New Zealand. ",
-               "URL https://github.com/tidylab/usethis2.",
+               "URL https://github.com/tidylab/usethat.",
                sep=""),
 
          mheader = "To cite R in publications use:",
 
 	 mfooter =
-         paste("We have invested a lot of time and effort in creating usethis2,",
+         paste("We have invested a lot of time and effort in creating usethat,",
           "please cite it when using it for data analysis.",
 	  "See also", sQuote("citation(\"pkgname\")"),
 	  "for citing R packages.", sep = " ")

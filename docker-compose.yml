@@ -3,7 +3,7 @@ services:
   # R Testing
   ######################################################
   r-test:
-    image: r-package/usethis2
+    image: r-package/usethat
     build:
       context: ./
       dockerfile: ./.dev/docker/r-test/Dockerfile
@@ -11,4 +11,4 @@ services:
     container_name: r_test
     restart: "no"
   ######################################################
-version: "3.8"
+version: "3.3"
