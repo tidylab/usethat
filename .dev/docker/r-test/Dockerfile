@@ -1,5 +1,5 @@
 # R Package Development: Core --------------------------------------------------
-FROM tidylab/package:4.2.0
+FROM tidylab/package:4.1.1
 
 # Install Project Dependencies -------------------------------------------------
 COPY ./DESCRIPTION ./DESCRIPTION
