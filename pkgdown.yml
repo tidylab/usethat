@@ -2,8 +2,8 @@ pandoc: 2.7.3
 pkgdown: 1.6.1
 pkgdown_sha: ~
 articles: {}
-last_built: 2021-08-11T09:04Z
+last_built: 2021-09-17T23:00Z
 urls:
-  reference: https://tidylab.github.io/usethis2//reference
-  article: https://tidylab.github.io/usethis2//articles
+  reference: https://tidylab.github.io/usethat//reference
+  article: https://tidylab.github.io/usethat//articles
 

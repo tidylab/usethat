@@ -102,7 +102,7 @@ operators include:
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/tidylab/usethis2/">
+  <a href="https://github.com/tidylab/usethat/">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -121,7 +121,7 @@ operators include:
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Use different pipes in your package</h1>
-    <small class="dont-index">Source: <a href='https://github.com/tidylab/usethis2/blob/master/R/use_pipes.R'><code>R/use_pipes.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/tidylab/usethat/blob/master/R/use_pipes.R'><code>R/use_pipes.R</code></a></small>
     <div class="hidden name"><code>use_pipes.Rd</code></div>
     </div>
 
@@ -163,7 +163,7 @@ operators include:</p><ul>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='va'>path</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempfile</a></span><span class='op'>(</span><span class='op'>)</span>
 <span class='fu'>use_pipes</span><span class='op'>(</span><span class='va'>path</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; Error : No root directory found in /private/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T/Rtmpe6mIwU/filee327e283066 or its parent directories. Root criterion: contains a file "DESCRIPTION" with contents matching "^Package: "</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/readLines.html'>readLines</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='va'>path</span>, <span class='st'>"utils-pipes.R"</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; Error : No root directory found in /private/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T/RtmpgVObn4/file1d925460b6c3 or its parent directories. Root criterion: contains a file "DESCRIPTION" with contents matching "^Package: "</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/readLines.html'>readLines</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='va'>path</span>, <span class='st'>"utils-pipes.R"</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;  [1] "#' Forward pipe operator"  "#'"                       
 #&gt;  [3] "#' @name %&gt;%"              "#' @keywords internal"    
 #&gt;  [5] "#' @importFrom purrr %&gt;%"  "#' @usage lhs \\%&gt;\\% rhs"

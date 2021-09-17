@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://tidylab.github.io/usethis2//index.html</loc>
+    <loc>https://tidylab.github.io/usethat//index.html</loc>
   </url>
   <url>
-    <loc>https://tidylab.github.io/usethis2//reference/add_service.html</loc>
+    <loc>https://tidylab.github.io/usethat//reference/add_service.html</loc>
   </url>
   <url>
-    <loc>https://tidylab.github.io/usethis2//reference/pipes.html</loc>
+    <loc>https://tidylab.github.io/usethat//reference/pipes.html</loc>
   </url>
   <url>
-    <loc>https://tidylab.github.io/usethis2//reference/use_microservice.html</loc>
+    <loc>https://tidylab.github.io/usethat//reference/use_microservice.html</loc>
   </url>
   <url>
-    <loc>https://tidylab.github.io/usethis2//reference/use_na.html</loc>
+    <loc>https://tidylab.github.io/usethat//reference/use_na.html</loc>
   </url>
   <url>
-    <loc>https://tidylab.github.io/usethis2//reference/use_pipes.html</loc>
+    <loc>https://tidylab.github.io/usethat//reference/use_pipes.html</loc>
   </url>
   <url>
-    <loc>https://tidylab.github.io/usethis2//reference/usethis2-package.html</loc>
+    <loc>https://tidylab.github.io/usethat//reference/usethat-package.html</loc>
   </url>
 </urlset>
