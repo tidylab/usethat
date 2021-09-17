@@ -1,10 +1,10 @@
-Package: usethis2
+Package: usethat
 Type: Package
 Title: Automate Analytic Project Setup and Development
-URL: https://tidylab.github.io/usethis2/, https://github.com/tidylab/usethis2
-BugReports: https://github.com/tidylab/usethis2/issues
+URL: https://tidylab.github.io/usethat/, https://github.com/tidylab/usethat
+BugReports: https://github.com/tidylab/usethat/issues
 Version: 0.2.0
-Date: 2021-08-01
+Date: 2021-09-01
 Authors@R: c(
     person("Harel", "Lustiger", email = "tidylab@gmail.com", role = c("aut", "cre"),
     comment = c(ORCID = "0000-0003-2953-9598"))

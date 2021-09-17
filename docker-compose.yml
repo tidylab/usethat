@@ -3,7 +3,7 @@ services:
   # R Testing
   ######################################################
   r-test:
-    image: r-package/usethis2
+    image: r-package/usethat
     build:
       context: ./
       dockerfile: ./.dev/docker/r-test/Dockerfile
