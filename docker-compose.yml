@@ -11,4 +11,4 @@ services:
     container_name: r_test
     restart: "no"
   ######################################################
-version: "3.8"
+version: "3.3"
