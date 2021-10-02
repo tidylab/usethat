@@ -11,7 +11,8 @@ NULL
 # Atoms -------------------------------------------------------------------
 {{tags}}
 NA_numeric_ <- structure(NA_real_, class = c("integer", "numeric"))
-
+{{tags}}
+NA_factor_ <- structure(factor(1), .Label = "<NA>", class = "factor")
 
 # Timedate ----------------------------------------------------------------
 {{tags}}
