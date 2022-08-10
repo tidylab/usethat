@@ -15,7 +15,7 @@ Description: Automate analytic project setup tasks that are otherwise performed
     more.
 License: MIT + file LICENSE
 Encoding: UTF-8
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2
 Roxygen: list(markdown = TRUE, r6 = TRUE)
 Language: en-GB
 Depends: 
@@ -25,5 +25,8 @@ Suggests:
 Imports: 
     microservices (>= 0.1.2),
     purrr,
+    tibble,
+    fs,
     usethis,
+    stringr,
     withr

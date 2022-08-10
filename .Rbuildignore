@@ -4,6 +4,7 @@
 .*_cache/
 ^data-raw/
 ^inst/snippets/
+^inst/wip/
 ^renv/
 ^revdep/
 ^vignettes/
