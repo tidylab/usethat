@@ -28,4 +28,5 @@ Imports:
     tibble,
     fs,
     usethis,
+    stringr,
     withr
