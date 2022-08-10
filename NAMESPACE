@@ -3,6 +3,7 @@
 export("%>%")
 export("%||%")
 export(add_service)
+export(add_value_object)
 export(use_microservice)
 export(use_na)
 export(use_pipes)
