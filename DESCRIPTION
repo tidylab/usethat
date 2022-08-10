@@ -25,5 +25,6 @@ Suggests:
 Imports: 
     microservices (>= 0.1.2),
     purrr,
+    tibble,
     usethis,
     withr

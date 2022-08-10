@@ -6,6 +6,7 @@ read_lines <- function(path) paste(readLines(path), collapse = "\n")
 
 # testthat ----------------------------------------------------------------
 expect_not_failure <- purrr::partial(testthat::expect_type, type = "environment")
+expect_no_error <- purrr::partial(testthat::expect_error, regexp = NA)
 
 
 # utils -------------------------------------------------------------------
