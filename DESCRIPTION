@@ -4,7 +4,7 @@ Title: Automate Analytic Project Setup and Development
 URL: https://tidylab.github.io/usethat/, https://github.com/tidylab/usethat
 BugReports: https://github.com/tidylab/usethat/issues
 Version: 0.3.0
-Date: 2021-09-01
+Date: 2022-06-23
 Authors@R: c(
     person("Harel", "Lustiger", email = "tidylab@gmail.com", role = c("aut", "cre"),
     comment = c(ORCID = "0000-0003-2953-9598"))
@@ -19,7 +19,7 @@ RoxygenNote: 7.1.1
 Roxygen: list(markdown = TRUE, r6 = TRUE)
 Language: en-GB
 Depends: 
-    R (>= 3.5)
+    R (>= 4.2)
 Suggests: 
     testthat
 Imports: 
