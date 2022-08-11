@@ -2,6 +2,7 @@
 
 export("%>%")
 export("%||%")
+export(Docker)
 export(add_service)
 export(use_microservice)
 export(use_na)

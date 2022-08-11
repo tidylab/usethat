@@ -29,4 +29,5 @@ Imports:
     fs,
     usethis,
     stringr,
+    R6,
     withr
