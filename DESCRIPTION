@@ -17,12 +17,9 @@ BugReports: https://github.com/tidylab/usethat/issues
 Depends: 
     R (>= 4.2)
 Imports: 
-    fs,
     microservices (>= 0.1.2),
     purrr,
     R6,
-    stringr,
-    tibble,
     usethis,
     withr
 Suggests: 
