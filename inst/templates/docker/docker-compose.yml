@@ -1,0 +1,14 @@
+services:
+  ######################################################
+  # R Testing
+  ######################################################
+  r-test:
+    image: r-package/usethat
+    build:
+      context: ./
+      dockerfile: ./.dev/docker/r-test/Dockerfile
+    entrypoint: '/bin/bash'
+    container_name: r_test
+    restart: "no"
+  ######################################################
+version: "3.3"

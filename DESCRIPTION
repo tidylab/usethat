@@ -17,11 +17,13 @@ BugReports: https://github.com/tidylab/usethat/issues
 Depends: 
     R (>= 4.2)
 Imports: 
+    cli,
     microservices (>= 0.1.2),
     purrr,
     R6,
     usethis,
-    withr
+    withr,
+    yaml
 Suggests: 
     testthat
 Encoding: UTF-8
