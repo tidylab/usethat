@@ -1,12 +1,10 @@
 # testthat ----------------------------------------------------------------
 expect_no_error <- purrr::partial(testthat::expect_error, regexp = NA)
 expect_file_exists <- function(file){ testthat::expect_true(file.exists(file), label = paste("There is no file at", file))}
-expect_file_contains <- function(file, regexp, ...) {file_content <- readLines(file); testthat::expect_match(file_content, regexp, ...)}
+expect_file_contains <- function(file, regexp, ...) {file_content <- paste(readLines(file), collapse = "\n"); testthat::expect_match(file_content, regexp, ...)}
+
 
 # utilities ---------------------------------------------------------------
-line_break <- function() paste0("\n", paste0(rep("#", 80), collapse = ""))
-banner <- function(title) paste0(line_break(), paste0("\n## ", title), line_break(), "\n", collapse = "")
-read_lines <- function(path) paste(readLines(path), collapse = "\n")
 create_package <- function(path){
     unlink(path, recursive = TRUE, force = TRUE)
     dir.create(path, FALSE, TRUE)

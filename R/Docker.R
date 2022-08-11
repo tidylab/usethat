@@ -32,9 +32,9 @@ Docker$set("private", ".initialize", overwrite = TRUE, function(stop_on_exit){
     private$stop_on_exit <- stop_on_exit
 
     if(isFALSE(private$.is_docker_installed())) {
-        cli::cli_alert_danger("Docker is not installed")
+        cli::cli_alert_warning("Docker is not installed")
     } else if (isFALSE(private$.is_docker_running())) {
-        cli::cli_alert_danger("Docker is not running")
+        cli::cli_alert_warning("Docker is not running")
     } else {
         cli::cli_alert_success("Docker is installed and running")
     }
